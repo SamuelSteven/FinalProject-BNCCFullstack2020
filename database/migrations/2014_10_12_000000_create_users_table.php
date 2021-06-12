@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->mediumText('profilePicture')->nullable();
             $table->string('email');
             $table->string('password');
-            $table->timestamps('updated_at')->nullable();
-            $table->timestamps('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
