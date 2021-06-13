@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\question;
 use App\answer;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+class AnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,12 +36,12 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
             'content' => 'required',
         ]);
 
-        question::create($request->all());
-        return redirect('/home')->with('status','Question Added Successfully!'); 
+        answer::create($request->all());
+        
+        return redirect('/home')->with('status','Answer Added Successfully!'); 
     }
 
     /**
@@ -54,10 +52,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $questions = question::find($id);
-        $answer = answer::where('questionId','=',$id)->get();
-        $answer_count = $answer->count();
-        return view('thread', compact('questions', 'answer', 'answer_count'));
+        //
     }
 
     /**
@@ -68,7 +63,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -78,21 +73,17 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, question $question)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
             'content' => 'required',
         ]);
         
-        question::where('id',$question->id)
+        answer::where('id',$id)
             ->update([
-                'title' => $request->title,
                 'content' => $request->content,
-                'userId' => $request->userId
             ]);
-        
-        return redirect('/home')->with('status','Question Edited Successfully!'); ;
+        return redirect('/home')->with('status','Answer Edited Successfully!'); 
     }
 
     /**
@@ -103,9 +94,7 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $questions = question::find($id);
-        $questions->delete();
-
-        return redirect('/home')->with('status','Question Deleted Successfully!');
+        answer::destroy($id);
+        return redirect('/home')->with('status','Answer Deleted Successfully!'); 
     }
 }

@@ -19,8 +19,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Home
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'QuestionController@store');
 Route::get('/home/{question}', 'QuestionController@show');
 Route::patch('/home/{question}', 'QuestionController@update');
 Route::delete('home/{question}', 'QuestionController@destroy');
+
+// Answer
+Route::post('/answer', 'AnswerController@store');
+Route::delete('/answer/{answer}', 'AnswerController@destroy');
+Route::patch('/answer/{answer}','AnswerController@update');
