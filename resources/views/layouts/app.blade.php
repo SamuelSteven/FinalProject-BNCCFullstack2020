@@ -70,12 +70,8 @@
                             <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <button class="btn btn-outline-info me-1 ml-5" id="askbutton" type="submit">Ask Question</button>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                            </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -85,7 +81,7 @@
                     </ul>
                 <form class="d-flex mr-5">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success me-5" type="submit">Search</button>
+                    <button class="btn btn-outline-info me-5" type="submit">Search</button>
                 </form>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
