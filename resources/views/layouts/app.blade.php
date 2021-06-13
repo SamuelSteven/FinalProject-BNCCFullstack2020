@@ -70,7 +70,7 @@
                             <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <button class="btn btn-outline-info me-1 ml-5" id="askbutton" type="submit">Ask Question</button>
+                            <a class="btn btn-primary" id="askbutton">Ask Question</a>
                         </li>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Action</a></li>

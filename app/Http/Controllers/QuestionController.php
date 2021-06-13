@@ -53,7 +53,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $questions = question::find($id);
+        return view('thread', compact('questions'));
     }
 
     /**
@@ -64,7 +65,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -76,7 +77,17 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $questions = question::find($id);
+        $questions->title = $request->title;
+        $questions->content = $request->content;
+        $questions->save();
+        
+        return redirect('/home');
     }
 
     /**
@@ -87,6 +98,9 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $questions = question::find($id);
+        $questions->delete();
+
+        return redirect('/home');
     }
 }

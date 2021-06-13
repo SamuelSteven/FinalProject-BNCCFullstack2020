@@ -100,7 +100,7 @@
                                 <h5 class="card-title">{{$question->title}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                                 <p class="card-text">{{$question->content}}</p>
-                                <a href="/question/{{$question->id}}" class="btn btn-primary">Read More</a>
+                                <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
                             </div>                          
                         </div>
                     </div>
