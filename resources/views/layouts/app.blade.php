@@ -70,14 +70,8 @@
                             <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-primary" id="askbutton">Ask Question</a>
+                            <a class="btn btn-primary ml-4 bg-info" id="askbutton">Ask Question</a>
                         </li>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
                     </ul>
                 <form class="d-flex mr-5">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -104,7 +98,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                    document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 

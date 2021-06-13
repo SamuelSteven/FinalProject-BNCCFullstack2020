@@ -59,14 +59,13 @@
         @csrf
             <div class="mb-3">
                 <h4 class="mb-3">Have Any Questions?</h4>
-                <button type="button" class="btn-close position-absolute top-0 end-0 mt-1" id="close"></button>
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close"></button>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter the Question Title" name="title" value="{{old('title')}}">
                 @error('title')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
             <div class="form-floating">
-                <label for="content">Enter the Question Content</label>
                 <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Enter the Question Content" id="content" style="height: 150px" name="content" value="{{old('content')}}"></textarea>
                 @error('content')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -106,21 +105,6 @@
                     </div>
                 @endforeach
             </div>
-            <!-- <div class="grid-container">
-                @foreach($questions as $question)
-                    <div class="grid-item">
-                        <div class="card" id="question-card" style="width: 20rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$question->title}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">{{$question->content}}</p>
-                                <a href="/question/{{$question->id}}" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                        
-                    </div>
-                @endforeach
-            </div> -->
         </div>
     </div>
 </div>
