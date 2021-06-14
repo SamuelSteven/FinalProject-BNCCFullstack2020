@@ -84,7 +84,7 @@
             <!-- Cards -->
             <div class="card" id="test">
                 <div class="card-header">{{ __('Welcome!') }}
-                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-1" onclick="closing()"></button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 mr-2" onclick="closing()"></button>
                 </div>
                 <div class="card-body">
                     {{ __('You are logged in!') }}

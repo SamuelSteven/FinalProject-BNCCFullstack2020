@@ -27,6 +27,12 @@ Route::patch('/home/{question}', 'QuestionController@update');
 Route::delete('home/{question}', 'QuestionController@destroy');
 
 // Answer
+Route::get('/answer/{answer}', 'AnswerController@show');
 Route::post('/answer', 'AnswerController@store');
 Route::delete('/answer/{answer}', 'AnswerController@destroy');
 Route::patch('/answer/{answer}','AnswerController@update');
+
+// Reply
+Route::post('/reply', 'ReplyController@store');
+Route::delete('/reply/{reply}', 'ReplyController@destroy');
+Route::patch('/reply/{reply}','ReplyController@update');

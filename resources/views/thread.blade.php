@@ -39,11 +39,23 @@
         #answer-count{
             margin-left: 280px;
         }
+        #reply-count{
+            margin-left: 495px;
+        }
+        #form_action_reply{
+            margin-left: 495px;
+        }
         #form_action{
+            margin-left:280px;
+        }
+        #form_actions{
             margin-left:280px;
         }
         .form-floating #content-textbox{
             padding-top:10px;
+        }
+        #reply_card{
+            margin-left: 110px;
         }
     </style>
 
@@ -105,7 +117,7 @@
                             <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By {{$a->user['username']}}</h6>
                             <p class="card-text my-4">{{ $a->content }}</p>
 
-                            <button type="submit" class="btn btn-info mt-3">Reply</button>
+                            <a href="#replycard" class="btn btn-info mx-1 mt-3" onclick="reply( {{$a->id}}, {{$key}});">Reply</a>
 
                             @if($a->user['id'] == Auth::user()->id)
                                 <a href="#answercard" class="btn btn-primary mx-1 mt-3" onclick="display(`{{$a->content}}`, {{$a->id}}, {{$key}});">Edit</a>
@@ -118,6 +130,7 @@
                         </div>
                     </div>
 
+                    <!-- Edit & Cancel Answers -->
                     <form method="POST" action="" id="form_action">
                         @method('patch')
                         @csrf
@@ -133,6 +146,62 @@
                             <a href="#edit" class="card-link mx-2 text-decoration-none" onclick="hide({{$key}});">Cancel</a>
                         </div>
                     </form>
+
+                    <!-- Edit & Cancel Replies -->
+                    <form method="POST" action="/reply" id="form_actions">
+                        @csrf
+                        <div class="form-floating d-none" id="reply" style="width:65rem;">
+                            <label for="content" style="margin-top:-9px;">Edit Your Reply Here</label>
+                            <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Reply Here" id="content" style="height: 150px" name="content"></textarea>
+                            @error('content')
+                                <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                            <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="answerId" value="{{ $a->id }}">
+                            <button type="submit" class="btn btn-primary my-3">Add Reply!</button>
+                            <a href="#reply" class="card-link mx-2 text-decoration-none" onclick="hideReply({{$key}});">Cancel</a>
+                        </div>
+                    </form>
+
+                    <!-- Reply -->
+                    <h5 class="card-text mt-4" id="reply-count">{{ $reply_count }} Replies</h5>
+                    @if($reply_count > 0)
+                        <!-- Reply Card -->
+                        @foreach ($reply as $keys => $r)
+                            <div class="card my-4 replycard" style="width: 58rem;" id="reply_card">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By {{$r->user_reply['username']}} reply to {{$a->user['username']}}</h6>
+                                    <p class="card-text my-4">{{ $r->content }}</p>
+
+                                    @if($r->user_reply['id'] == Auth::user()->id)
+                                        <a href="#replycard" class="btn btn-primary mx-1 mt-3" onclick="displayReply(`{{$r->content}}`, {{$r->id}}, {{$keys}});">Edit</a>
+                                        <form action="/reply/{{$r->id}}" method="POST" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger mt-3">Delete</button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <!-- Edit & Cancel Reply -->
+                            <form method="POST" action="" id="form_action_reply">
+                                @method('patch')
+                                @csrf
+                                <div class="form-floating d-none" id="edit" style="width:58rem;">
+                                    <label for="content" style="margin-top:-9px;">Edit Your Reply Here</label>
+                                    <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Reply Here" id="content" style="height: 150px" name="content"></textarea>
+                                    @error('content')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="answerId" value="{{ $a->id }}">
+                                    <button type="submit" class="btn btn-primary my-3">Edit Your Reply!</button>
+                                    <a href="#edit" class="card-link mx-2 text-decoration-none" onclick="hideReply1({{$key}});">Cancel</a>
+                                </div>
+                            </form>
+                        @endforeach
+                    @endif
                 @endforeach
             @endif
 
@@ -157,9 +226,11 @@
     </div>
     
     <script>
+
         document.getElementById("edit").addEventListener("click", function(){
             document.querySelector(".form-popup").style.display = "flex";
         });
+
         document.getElementById("close").addEventListener("click", function(){
             document.querySelector(".form-popup").style.display = "none";
         });
@@ -172,10 +243,36 @@
             form[z].action = "/answer/" + y;
             content[z].value = x;
         }
+
         function hide(k){
             var form = $("#form_action #edit");
             form[k].className = "form-floating edit d-none";
         }
+
+        function reply(y,z){
+            var form_edit = $("#form_actions #reply");
+            form_edit[z].className = "form-floating edit d-block";
+        }
+
+        function hideReply(k){
+            var form = $("#form_actions #reply");
+            form[k].className = "form-floating edit d-none";
+        }
+
+        function displayReply(x,y,z){
+            var form_edit = $("#form_action_reply #edit");
+            var form = $(".row #form_action_reply");
+            var content = $(".row #form_action_reply #edit #content");
+            form_edit[z].className = "form-floating edit d-block";
+            form[z].action = "/reply/" + y;
+            content[z].value = x;
+        }
+
+        function hideReply1(k){
+            var form = $("#form_action_reply #edit");
+            form[k].className = "form-floating edit d-none";
+        }
+
     </script>
     
 @endsection
