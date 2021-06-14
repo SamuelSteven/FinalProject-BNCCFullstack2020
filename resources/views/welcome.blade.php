@@ -59,54 +59,52 @@
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-light navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Forum Sunib</a>
+                <a class="navbar-brand" href="{{url('/home')}}">Forum Sunib</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a href="register" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                            </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
                     </ul>
                 <form class="d-flex mr-5">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success me-5" type="submit">Search</button>
+                    <button class="btn btn-outline-info me-5" type="submit">Search</button>
                 </form>
                 <div class="flex-center ml-auto">
-                    @if (Route::has('login'))
-                        <div class="top-right links">
-                            @auth
-                                <a href="{{ url('/home') }}">Home</a>
-                            @else
-                                <a href="{{ route('login') }}">Login</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}">Register</a>
-                                @endif
-                            @endauth
-                        </.>
-                    @endif
+                    <a href="{{ route('login') }}">Login</a>
                 </div>
             </div>
         </nav>
         
         <!-- Content -->
         <div class="content">
-            
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">     
+                        <!-- Content -->
+                        <div class="row">
+                            @foreach($questions as $question)
+                                <div class="col-md-4 mt-5">
+                                    <div class="card" id="question-card" style="width: 20rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{$question->title}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                            <p class="card-text">{{$question->content}}</p>
+                                            <a href="/thread_no_login/{{$question->id}}" class="btn btn-primary">Read More</a>
+                                        </div>                          
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
     </body>

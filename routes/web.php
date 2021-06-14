@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 // Home
@@ -36,3 +32,9 @@ Route::patch('/answer/{answer}','AnswerController@update');
 Route::post('/reply', 'ReplyController@store');
 Route::delete('/reply/{reply}', 'ReplyController@destroy');
 Route::patch('/reply/{reply}','ReplyController@update');
+
+//Welcome
+Route::get('/', 'WelcomeController@index')->name('welcome');
+
+//Thread No Login
+Route::get('/thread_no_login/{question}', 'ThreadController@show');
