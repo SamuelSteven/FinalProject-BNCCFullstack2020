@@ -59,14 +59,14 @@
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-light navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{url('/home')}}">Forum Sunib</a>
+                <a class="navbar-brand" href="{{url('/')}}">Forum Sunib</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="register" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
@@ -76,9 +76,15 @@
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-info me-5" type="submit">Search</button>
                 </form>
-                <div class="flex-center ml-auto">
-                    <a href="{{ route('login') }}">Login</a>
-                </div>
+                @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                            <a href="{{ url('/') }}">Home</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
+                        @endauth
+                    </.>
+                @endif
             </div>
         </nav>
         
