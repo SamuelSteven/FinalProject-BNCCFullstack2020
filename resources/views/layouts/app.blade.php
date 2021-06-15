@@ -22,6 +22,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/87bc1c7077.js" crossorigin="anonymous"></script>
         <!-- Styles -->
         <style>
             html, body {
@@ -52,6 +53,9 @@
                 margin-left:auto;
                 margin-right: auto;
                 margin-top:20px;
+            }
+            #greetings{
+                margin-bottom: 5px;
             }
         </style>
     </head>
@@ -96,15 +100,17 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <p class="d-flex justify-content-center" id="greetings">Hi, {{ Auth::user()->username }}!</p>
+                                <a class="dropdown-item" href="/myprofile/{{Auth::user()->id}}">{{ __('My Profile') }}</a>
+                                <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
-                                </form>
+                                </form>                               
                             </div>
                         </li>
                     @endguest

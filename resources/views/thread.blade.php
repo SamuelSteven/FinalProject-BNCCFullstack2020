@@ -93,7 +93,12 @@
             <div class="card" style="width: 65rem;">
                 <div class="card-body">
                     <h4 class="card-title">{{$questions->title}}</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By {{$questions->users['username']}}</h6>
+                    @if($questions->users['id'] == Auth::user()->id)
+                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a href="/myprofile/{{Auth::user()->id}}">{{$questions->users['username']}}</a></h6>
+                    @else
+                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a href="/otherprofile/{{$questions->users['id']}}">{{$questions->users['username']}}</a></h6>
+                    @endif
+                    
                     <p class="card-text">{{$questions->content}}</p>
                     @if($questions->users['id'] == Auth::user()->id)
                         <a href="#" class="btn btn-primary" id="edit">Edit</a>
@@ -114,7 +119,12 @@
                 @foreach ($answer as $key => $a)
                     <div class="card my-4 answercard" style="width: 65rem;">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By {{$a->user['username']}}</h6>
+                        @if($a->user['id'] == Auth::user()->id)
+                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a href="/myprofile/{{Auth::user()->id}}">{{$a->user['username']}}</a></h6>
+                        @else
+                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                        @endif
+                            
                             <p class="card-text my-4">{{ $a->content }}</p>
 
                             <a href="#replycard" class="btn btn-info mx-1 mt-3" onclick="reply( {{$a->id}}, {{$key}});">Reply</a>
@@ -170,7 +180,14 @@
                         @foreach ($reply as $keys => $r)
                             <div class="card my-4 replycard" style="width: 58rem;" id="reply_card">
                                 <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By {{$r->user_reply['username']}} reply to {{$a->user['username']}}</h6>
+                                    @if($r->user_reply['id'] == Auth::user()->id && $a->user['id'] != Auth::user()->id)
+                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/myprofile/{{Auth::user()->id}}">{{$r->user_reply['username']}}</a> reply to <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                                    @elseif($r->user_reply['id'] != Auth::user()->id && $a->user['id'] == Auth::user()->id)
+                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/otherprofile/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a href="/myprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                                    @else
+                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/otherprofile/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                                    @endif
+                                    
                                     <p class="card-text my-4">{{ $r->content }}</p>
 
                                     @if($r->user_reply['id'] == Auth::user()->id)

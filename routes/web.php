@@ -38,3 +38,9 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 
 //Thread No Login
 Route::get('/thread_no_login/{question}', 'ThreadController@show');
+
+//My Profile
+Route::get('/myprofile/{user}', 'MyprofileController@show');
+
+//Other Profile
+Route::get('/otherprofile/{user}', 'OtherprofileController@show');
