@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\question;
+use Illuminate\Support\Facades\DB;
 
 class WelcomeController extends Controller
 {
@@ -41,13 +42,20 @@ class WelcomeController extends Controller
 
     /**
      * Display the specified resource.
-     *
+      *@param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        // $questions = question::where([
+        //     DB::table('questions')
+        //         ->where('title', 'like', '%' . $request->keyword .'%')
+        //         ->get()
+        // ]);
+        // dd($request->keyword);
+
+        // return view("welcome", compact('questions'));
     }
 
     /**

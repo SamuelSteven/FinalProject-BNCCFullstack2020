@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\reply;
+use App\User;
 
-class ReplyController extends Controller
+class SettingsProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,13 +35,7 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'content' => 'required',
-        ]);
-
-        reply::create($request->all());
-        
-        return redirect('/home')->with('status','Reply Added Successfully!'); 
+        //
     }
 
     /**
@@ -52,7 +46,8 @@ class ReplyController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::find($id);
+        return view('/settings', compact('users'));
     }
 
     /**
@@ -76,14 +71,18 @@ class ReplyController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'content' => ['required'],
+            'name' => ['required'],
+            'username' => ['required'],
+            'email' => ['required']
         ]);
         
-        reply::where('id',$id)
+        User::where('id',$id)
             ->update([
-                'content' => $request->content,
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email
             ]);
-        return redirect('/home')->with('status','Reply Edited Successfully!'); 
+        return redirect('/home')->with('status','Profile Edited Successfully!'); 
     }
 
     /**
@@ -94,7 +93,6 @@ class ReplyController extends Controller
      */
     public function destroy($id)
     {
-        answer::destroy($id);
-        return redirect('/home')->with('status','Reply Deleted Successfully!'); 
+        //
     }
 }

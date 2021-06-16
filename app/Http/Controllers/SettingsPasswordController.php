@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\reply;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
-class ReplyController extends Controller
+class SettingsPasswordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,13 +37,7 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'content' => 'required',
-        ]);
-
-        reply::create($request->all());
-        
-        return redirect('/home')->with('status','Reply Added Successfully!'); 
+        //
     }
 
     /**
@@ -76,14 +72,16 @@ class ReplyController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'content' => ['required'],
+            'currentPassword' => ['required', new MatchOldPassword],
+            'newPassword' => ['required'],
+            'confirmPassword' => ['same:newPassword']
         ]);
         
-        reply::where('id',$id)
+        User::where('id',$id)
             ->update([
-                'content' => $request->content,
+                'password' => Hash::make($request->confirmPassword)
             ]);
-        return redirect('/home')->with('status','Reply Edited Successfully!'); 
+        return redirect('/home')->with('status','Password Changed Successfully!');    
     }
 
     /**
@@ -94,7 +92,6 @@ class ReplyController extends Controller
      */
     public function destroy($id)
     {
-        answer::destroy($id);
-        return redirect('/home')->with('status','Reply Deleted Successfully!'); 
+        //
     }
 }

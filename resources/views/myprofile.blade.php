@@ -37,7 +37,7 @@
                     </div>
                     
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary button">Settings</button>
+                        <a href="/settings/{{$users->id}}" class="btn btn-primary">Settings</a>
                     </div>
                     
                 </div>
