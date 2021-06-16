@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\question;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,9 +28,33 @@ class HomeController extends Controller
     public function index()
     {
         $questions = question::all();
-        // $mytime = Carbon::now('Asia/Jakarta')->format('d-m-Y H:i:s');
+        $questions_count = NULL;
+        foreach($questions as $q){
+            $questions_time[] = $q->created_at->diffForHumans();
+        }
         
-        // dd($questions[0]->created_at);
-        return view('home',compact('questions'));
+        return view('home',compact('questions', 'questions_count', 'questions_time'));
+    }
+
+    /**
+     * Display the specified resource.
+      *@param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function show(Request $request)
+    {
+        $questions = DB::table('questions')
+            ->where('title', 'like', '%' . $request->keyword .'%')
+            ->orWhere('content', 'like', '%' . $request->keyword .'%')
+            ->get();
+        $questions_count = $questions->count();
+        $question = question::all();
+        foreach($question as $q){
+            $questions_time[] = $q->created_at->diffForHumans();
+        }
+
+        return view("home", compact('questions', 'questions_count','questions_time'));
     }
 }

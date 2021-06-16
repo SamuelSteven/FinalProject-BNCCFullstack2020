@@ -16,7 +16,11 @@ class WelcomeController extends Controller
     public function index()
     {
         $questions = question::all();
-        return view('welcome',compact('questions'));
+        $questions_count = NULL;
+        foreach($questions as $q){
+            $questions_time[] = $q->created_at->diffForHumans();
+        }
+        return view('welcome',compact('questions','questions_count','questions_time'));
     }
 
     /**
@@ -48,14 +52,17 @@ class WelcomeController extends Controller
      */
     public function show(Request $request)
     {
-        // $questions = question::where([
-        //     DB::table('questions')
-        //         ->where('title', 'like', '%' . $request->keyword .'%')
-        //         ->get()
-        // ]);
-        // dd($request->keyword);
+        $questions = DB::table('questions')
+            ->where('title', 'like', '%' . $request->keyword .'%')
+            ->orWhere('content', 'like', '%' . $request->keyword .'%')
+            ->get();
+        $questions_count = $questions->count();
+        $question = question::all();
+        foreach($question as $q){
+            $questions_time[] = $q->created_at->diffForHumans();
+        }
 
-        // return view("welcome", compact('questions'));
+        return view("welcome", compact('questions', 'questions_count', 'questions_time'));
     }
 
     /**

@@ -119,7 +119,7 @@
             <div class="card" style="width: 65rem;">
                 <div class="card-body">
                     <h4 class="card-title">{{$questions->title}}</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a href="/otherprofile/{{$questions->users['id']}}">{{$questions->users['username']}}</a></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a href="/otherprofile_no_login/{{$questions->users['id']}}">{{$questions->users['username']}}</a></h6>
                     <p class="card-text">{{$questions->content}}</p>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                 @foreach ($answer as $key => $a)
                     <div class="card my-4 answercard" style="width: 65rem;">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a href="/otherprofile_no_login/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
                             <p class="card-text my-4">{{ $a->content }}</p>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
                         @foreach ($reply as $keys => $r)
                             <div class="card my-4 replycard" style="width: 58rem;" id="reply_card">
                                 <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/otherprofile/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/otherprofile_no_login/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a href="/otherprofile_no_login/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
                                     <p class="card-text my-4">{{ $r->content }}</p>
                                 </div>
                             </div>
