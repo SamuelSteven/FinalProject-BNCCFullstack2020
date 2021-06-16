@@ -15,9 +15,17 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $id)
     {
-        //
+        question::where('id',$id)
+            ->update([
+                'status' => $request->status,
+            ]);
+        if($request->status == "true"){
+            return redirect('/home')->with('status','Thread Opened Successfully!');     
+        }else{
+            return redirect('/home')->with('danger','Thread Closed Successfully!'); 
+        }
     }
 
     /**

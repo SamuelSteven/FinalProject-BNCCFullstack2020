@@ -20,7 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'QuestionController@store');
 Route::get('/home/{question}', 'QuestionController@show');
 Route::patch('/home/{question}', 'QuestionController@update');
-Route::delete('home/{question}', 'QuestionController@destroy');
+Route::delete('/home/{question}', 'QuestionController@destroy');
+Route::patch('/home/{question}', 'QuestionController@index');
 
 // Answer
 Route::get('/answer/{answer}', 'AnswerController@show');

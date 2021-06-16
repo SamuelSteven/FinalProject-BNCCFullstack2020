@@ -52,6 +52,15 @@
     @endif
 </div>
 
+<div class="popup">
+    @if (session('danger'))
+        <div class="alert alert-danger" id="notif">
+            {{ session('danger') }}
+            <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="btn-close"></button>
+        </div>
+    @endif
+</div>
+
 <!-- PopUp Form -->
 <div class="form-popup" id="popup">
     <div class="popup-content">
@@ -96,8 +105,11 @@
                     <div class="col-md-4 mt-5">
                         <div class="card" id="question-card" style="width: 20rem;">
                             <div class="card-body">
-                                <h5 class="card-title">{{$question->title}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <h5 class="card-title d-inline">{{$question->title}}</h5>
+                                @if ($question->status == "false")
+                                    <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
+                                @endif
+                                <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$question->created_at}}</h6>
                                 <p class="card-text">{{$question->content}}</p>
                                 <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
                             </div>                          
