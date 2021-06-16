@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\question;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
 class HomeController extends Controller
@@ -26,6 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $questions = question::all();
+        // $mytime = Carbon::now('Asia/Jakarta')->format('d-m-Y H:i:s');
+        
+        // dd($questions[0]->created_at);
         return view('home',compact('questions'));
     }
 }
