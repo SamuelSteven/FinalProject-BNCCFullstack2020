@@ -101,14 +101,20 @@
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-info me-5" type="submit">Search</button>
             </form>
-            <div class="flex-center ml-auto">
-                <a href="{{ route('login') }}">Login</a>
-            </div>
+            @if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <a href="{{ url('/') }}">Home</a>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+                    @endauth
+                </.>
+            @endif
         </div>
     </nav>
 
     <!-- Question -->
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="card" style="width: 65rem;">
                 <div class="card-body">

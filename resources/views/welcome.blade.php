@@ -69,11 +69,11 @@
                             <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="register" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
+                            <a href="{{ route('register') }}" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
                         </li>
                     </ul>
-                <form class="d-flex mr-5">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex mr-5" method="POST" action="{{url('/')}}">
+                    <input class="form-control" type="search" placeholder="Search" name="keyword" aria-label="Search">
                     <button class="btn btn-outline-info me-5" type="submit">Search</button>
                 </form>
                 @if (Route::has('login'))

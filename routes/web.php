@@ -33,14 +33,22 @@ Route::post('/reply', 'ReplyController@store');
 Route::delete('/reply/{reply}', 'ReplyController@destroy');
 Route::patch('/reply/{reply}','ReplyController@update');
 
-//Welcome
+// Welcome
 Route::get('/', 'WelcomeController@index')->name('welcome');
+// Route::post('/', 'WelcomeController@show');
 
-//Thread No Login
+// Thread No Login
 Route::get('/thread_no_login/{question}', 'ThreadController@show');
 
-//My Profile
+// My Profile
 Route::get('/myprofile/{user}', 'MyprofileController@show');
 
-//Other Profile
+// Other Profile
 Route::get('/otherprofile/{user}', 'OtherprofileController@show');
+
+// Settings Profile
+Route::get('/settings/{user}', 'SettingsProfileController@show');
+Route::patch('/settingsProfile/{user}','SettingsProfileController@update');
+
+// Settings Password
+Route::patch('/settingsPassword/{user}','SettingsPasswordController@update');

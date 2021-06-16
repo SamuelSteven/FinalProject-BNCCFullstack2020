@@ -51,9 +51,6 @@
         #form_actions{
             margin-left:280px;
         }
-        .form-floating #content-textbox{
-            padding-top:10px;
-        }
         #reply_card{
             margin-left: 110px;
         }
@@ -75,7 +72,7 @@
                     @enderror
                 </div>
                 <label for="content-textbox" style="margin-left:-420px;">Content of Question</label>
-                <div class="form-floating">
+                <div class="form">
                     <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Enter the Question Content" id="content-textbox" style="height: 150px" name="content" value="{{old('content')}}">{{$questions->content}}</textarea>
                     @error('content')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -144,7 +141,7 @@
                     <form method="POST" action="" id="form_action">
                         @method('patch')
                         @csrf
-                        <div class="form-floating d-none" id="edit" style="width:65rem;">
+                        <div class="form d-none" id="edit" style="width:65rem;">
                             <label for="content" style="margin-top:-9px;">Edit Your Answer Here</label>
                             <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Answer Here" id="content" style="height: 150px" name="content"></textarea>
                             @error('content')
@@ -160,7 +157,7 @@
                     <!-- Edit & Cancel Replies -->
                     <form method="POST" action="/reply" id="form_actions">
                         @csrf
-                        <div class="form-floating d-none" id="reply" style="width:65rem;">
+                        <div class="form d-none" id="reply" style="width:65rem;">
                             <label for="content" style="margin-top:-9px;">Edit Your Reply Here</label>
                             <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Reply Here" id="content" style="height: 150px" name="content"></textarea>
                             @error('content')
@@ -205,7 +202,7 @@
                             <form method="POST" action="" id="form_action_reply">
                                 @method('patch')
                                 @csrf
-                                <div class="form-floating d-none" id="edit" style="width:58rem;">
+                                <div class="form d-none" id="edit" style="width:58rem;">
                                     <label for="content" style="margin-top:-9px;">Edit Your Reply Here</label>
                                     <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Reply Here" id="content" style="height: 150px" name="content"></textarea>
                                     @error('content')
@@ -226,9 +223,9 @@
              <hr class="mt-1 mb-5" style="width: 65rem">
              <form method="POST" action="/answer" style="width: 65rem;">
                 @csrf
-                <div class="form-floating">
+                <div class="form">
                     <h4 class="mb-2">Write a Comment</h4>
-                    <label for="content" class="mt-4">Enter Your Answer Here</label>
+                    <label for="content" class="mt-4">Have any thoughts?</label>
                     <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Enter Your Answer Here" id="content" style="height: 150px" name="content"></textarea>
                     @error('content')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -256,38 +253,38 @@
             var form_edit = $("#form_action #edit");
             var form = $(".row #form_action");
             var content = $(".row #form_action #edit #content");
-            form_edit[z].className = "form-floating edit d-block";
+            form_edit[z].className = "form edit d-block";
             form[z].action = "/answer/" + y;
             content[z].value = x;
         }
 
         function hide(k){
             var form = $("#form_action #edit");
-            form[k].className = "form-floating edit d-none";
+            form[k].className = "form edit d-none";
         }
 
         function reply(y,z){
             var form_edit = $("#form_actions #reply");
-            form_edit[z].className = "form-floating edit d-block";
+            form_edit[z].className = "form edit d-block";
         }
 
         function hideReply(k){
             var form = $("#form_actions #reply");
-            form[k].className = "form-floating edit d-none";
+            form[k].className = "form edit d-none";
         }
 
         function displayReply(x,y,z){
             var form_edit = $("#form_action_reply #edit");
             var form = $(".row #form_action_reply");
             var content = $(".row #form_action_reply #edit #content");
-            form_edit[z].className = "form-floating edit d-block";
+            form_edit[z].className = "form edit d-block";
             form[z].action = "/reply/" + y;
             content[z].value = x;
         }
 
         function hideReply1(k){
             var form = $("#form_action_reply #edit");
-            form[k].className = "form-floating edit d-none";
+            form[k].className = "form edit d-none";
         }
 
     </script>

@@ -89,8 +89,8 @@ class QuestionController extends Controller
     public function update(Request $request, question $question)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
+            'title' => ['required'],
+            'content' => ['required'],
         ]);
         
         question::where('id',$question->id)

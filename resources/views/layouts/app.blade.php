@@ -79,7 +79,7 @@
                     </ul>
                 <form class="d-flex mr-5">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-info me-5" type="submit">Search</button>
+                    <button class="btn btn-outline-info me-5" id="search_button" type="submit">Search</button>
                 </form>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -102,7 +102,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <p class="d-flex justify-content-center" id="greetings">Hi, {{ Auth::user()->username }}!</p>
                                 <a class="dropdown-item" href="/myprofile/{{Auth::user()->id}}">{{ __('My Profile') }}</a>
-                                <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
+                                <a class="dropdown-item" href="/settings/{{Auth::user()->id}}">{{ __('Settings') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
