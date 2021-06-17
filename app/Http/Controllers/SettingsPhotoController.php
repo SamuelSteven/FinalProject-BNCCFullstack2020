@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-class SettingsProfileController extends Controller
+class SettingsPhotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class SettingsProfileController extends Controller
      */
     public function store(Request $request)
     {
-        
+    
     }
 
     /**
@@ -46,8 +46,7 @@ class SettingsProfileController extends Controller
      */
     public function show($id)
     {
-        $users = User::find($id);
-        return view('/settings', compact('users'));
+        
     }
 
     /**
@@ -68,21 +67,20 @@ class SettingsProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
-            'name' => ['required'],
-            'username' => ['required'],
-            'email' => ['required']
+            'photo' => 'mimes:jpeg,jpg,png,svg,gif'
         ]);
+
+        $img = $request->photo->getClientOriginalName(). '-' . time() . '.' . $request->photo->extension();
         
-        User::where('id',$id)
-            ->update([
-                'name' => $request->name,
-                'username' => $request->username,
-                'email' => $request->email
-            ]);
-        return redirect('/home')->with('status','Profile Edited Successfully!'); 
+        $user = User::find($request->userId);
+        $user->photo = $img;
+        $user->save();
+        
+        $request->photo->move(public_path('image'), $img);
+        return redirect('/home');
     }
 
     /**

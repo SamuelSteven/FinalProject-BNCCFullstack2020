@@ -53,3 +53,6 @@ Route::patch('/settingsProfile/{user}','SettingsProfileController@update');
 
 // Settings Password
 Route::patch('/settingsPassword/{user}','SettingsPasswordController@update');
+
+//Settings Photo
+Route::post('/settingsPhoto', 'SettingsPhotoController@update');

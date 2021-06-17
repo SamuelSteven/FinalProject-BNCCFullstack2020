@@ -110,7 +110,7 @@
                                     <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
                                 @endif
                                 <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$question->created_at}}</h6>
-                                <p class="card-text">{{$question->content}}</p>
+                                <p class="card-text">{{Str::limit($question->content, 30)}}</p>
                                 <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
                             </div>                          
                         </div>

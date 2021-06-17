@@ -58,6 +58,16 @@
                     </form>
 
                     <!-- Avatar -->
+                    <form method="POST" action="/settingsPhoto" enctype="multipart/form-data" id="form_upload" class="form-photo d-none">
+                        @csrf
+                        <div class="form-group">
+                            <label for="photo">Upload photo</label>
+                            <input type="file" class="form-control-file" id="photo" name="photo">
+                            <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
 
                     <!-- Password -->
                     <form method="POST" action="/settingsPassword/{{$users->id}}" id="form_actions" class="form-password d-none">
@@ -90,14 +100,17 @@
         function show_profile(){
             document.getElementById("form_actions").className = "form-password d-none";
             document.getElementById("form_action").className = "form-profile d-block";
+            document.getElementById("form_upload").className = "form-photo d-none";
         }
         function show_avatar(){
-            document.getElementById("form_actions").className = "form-password d-none";
             document.getElementById("form_action").className = "form-profile d-none";
+            document.getElementById("form_upload").className = "form-photo d-block";
+            document.getElementById("form_actions").className = "form-password d-none";
         }
         function show_password(){
             document.getElementById("form_actions").className = "form-password d-block";
             document.getElementById("form_action").className = "form-profile d-none";
+            document.getElementById("form_upload").className = "form-photo d-none";
         }
     </script>
 @endsection
