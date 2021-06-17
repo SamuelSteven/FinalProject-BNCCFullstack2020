@@ -23,6 +23,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/87bc1c7077.js" crossorigin="anonymous"></script>
+        
         <!-- Styles -->
         <style>
             html, body {
@@ -77,8 +78,8 @@
                             <a class="btn btn-primary ml-4 bg-info" id="askbutton">Ask Question</a>
                         </li>
                     </ul>
-                <form class="d-flex mr-5">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex mr-5" method="GET" action="{{url('/home/search')}}">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
                     <button class="btn btn-outline-info me-5" id="search_button" type="submit">Search</button>
                 </form>
                 <!-- Right Side Of Navbar -->

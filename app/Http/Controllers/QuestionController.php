@@ -21,6 +21,7 @@ class QuestionController extends Controller
             ->update([
                 'status' => $request->status,
             ]);
+            
         if($request->status == "true"){
             return redirect('/home')->with('status','Thread Opened Successfully!');     
         }else{
@@ -105,7 +106,8 @@ class QuestionController extends Controller
             ->update([
                 'title' => $request->title,
                 'content' => $request->content,
-                'userId' => $request->userId
+                'userId' => $request->userId,
+                'status' => $request->status
             ]);
         
         return redirect('/home')->with('status','Question Edited Successfully!'); ;

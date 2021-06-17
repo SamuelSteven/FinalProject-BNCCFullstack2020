@@ -17,11 +17,12 @@ Auth::routes();
 
 // Home
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/search', 'HomeController@show');
 Route::post('/home', 'QuestionController@store');
 Route::get('/home/{question}', 'QuestionController@show');
 Route::patch('/home/{question}', 'QuestionController@update');
 Route::delete('/home/{question}', 'QuestionController@destroy');
-Route::patch('/home/{question}', 'QuestionController@index');
+Route::patch('/home/thread/{question}', 'QuestionController@index');
 
 // Answer
 Route::get('/answer/{answer}', 'AnswerController@show');
@@ -36,7 +37,7 @@ Route::patch('/reply/{reply}','ReplyController@update');
 
 // Welcome
 Route::get('/', 'WelcomeController@index')->name('welcome');
-// Route::post('/', 'WelcomeController@show');
+Route::get('/search', 'WelcomeController@show');
 
 // Thread No Login
 Route::get('/thread_no_login/{question}', 'ThreadController@show');
@@ -45,7 +46,8 @@ Route::get('/thread_no_login/{question}', 'ThreadController@show');
 Route::get('/myprofile/{user}', 'MyprofileController@show');
 
 // Other Profile
-Route::get('/otherprofile/{user}', 'OtherprofileController@show');
+Route::get('/otherprofile/{user}', 'OtherProfileController@show');
+Route::get('/otherprofile_no_login/{user}', 'OtherProfileController@display');
 
 // Settings Profile
 Route::get('/settings/{user}', 'SettingsProfileController@show');
