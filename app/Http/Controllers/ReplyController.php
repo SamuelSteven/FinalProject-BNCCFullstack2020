@@ -94,7 +94,7 @@ class ReplyController extends Controller
      */
     public function destroy($id)
     {
-        answer::destroy($id);
-        return redirect('/home')->with('status','Reply Deleted Successfully!'); 
+        reply::destroy($id);
+        return redirect('/home')->with('danger','Reply Deleted Successfully!'); 
     }
 }

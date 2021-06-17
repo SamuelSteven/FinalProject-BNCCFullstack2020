@@ -79,6 +79,7 @@
                     @enderror
                 </div>
                 <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="status" value="{{$questions->status}}">
                 <button type="submit" class="btn btn-primary my-3">Edit Question!</button>
             </form>
         </div>
@@ -110,14 +111,14 @@
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
 
-                            <form class="d-inline"method="POST" action="/home/{{$questions->id}}">
+                            <form class="d-inline"method="POST" action="/home/thread/{{$questions->id}}">
                             @method('patch')
                             @csrf
                                 <button type="submit" class="btn btn-dark">Close Thread</button>
                                 <input type="hidden" name="status" value="false">
                             </form>
                         @else
-                            <form class="d-inline"method="POST" action="/home/{{$questions->id}}">
+                            <form class="d-inline"method="POST" action="/home/thread/{{$questions->id}}">
                             @method('patch')
                             @csrf
                                 <button type="submit" class="btn btn-dark">Open Thread</button>
