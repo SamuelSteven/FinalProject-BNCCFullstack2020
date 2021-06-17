@@ -21,10 +21,10 @@
             <div class="card" style="width: 55rem">
                 <div class="card-body">
                     <h5 class="card-title">My Profile</h5>
-                    @if($users->photo == "NULL")
-                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{url('/image/profile-placeholder.png')}}" alt="">
+                    @if($users->photo == NULL)
+                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{asset('images/profile-placeholder.png')}}" alt="">
                     @else
-                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{'/image/'.$users->photo}}" alt="">
+                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{'/images/'.$users->photo}}" alt="">
                     @endif
                     <div class="icon">
                         <span class="d-inline-block">

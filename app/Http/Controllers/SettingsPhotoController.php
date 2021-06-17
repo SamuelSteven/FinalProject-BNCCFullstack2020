@@ -78,9 +78,9 @@ class SettingsPhotoController extends Controller
         $user = User::find($request->userId);
         $user->photo = $img;
         $user->save();
-        
-        $request->photo->move(public_path('image'), $img);
-        return redirect('/home');
+
+        $request->photo->move(public_path('images'), $img);
+        return redirect('/home')->with('status','Photo Uploaded Successfully!'); ;
     }
 
     /**
