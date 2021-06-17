@@ -80,22 +80,23 @@
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-            </div>
-            <!-- Content -->
-            <div class="row">
-                @foreach($questions as $question)
-                    <div class="col-md-4 mt-5">
-                        <div class="card" id="question-card" style="width: 20rem;">
-                            <div class="card-body">
-                                <h5 class="card-title d-inline">{{$question->title}}</h5>
-                                @if ($question->status == "false")
-                                    <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
-                                @endif
-                                <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$question->created_at}}</h6>
-                                <p class="card-text">{{Str::limit($question->content, 30)}}</p>
-                                <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
-                            </div>                          
-                        </div>
+                <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                <button type="submit" class="btn btn-primary my-3">Add Question!</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">     
+                <!-- Cards -->
+                <div class="card" id="test">
+                    <div class="card-header">{{ __('Welcome!') }}
+                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 mr-2" onclick="closing()"></button>
+                    </div>
+                    <div class="card-body">
+                        {{ __('You are logged in!') }}
                     </div>
                 </div>
                 <!-- Content -->
@@ -114,7 +115,7 @@
                                         <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
                                     @endif
                                     <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
-                                    <p class="card-text">{{$question->content}}</p>
+                                    <p class="card-text">{{Str::limit($question->content, 73)}}</p>
                                     <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
                                 </div>                          
                             </div>

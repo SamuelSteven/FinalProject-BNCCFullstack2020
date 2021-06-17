@@ -102,7 +102,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{$question->title}}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
-                                            <p class="card-text">{{$question->content}}</p>
+                                            <p class="card-text">{{Str::limit($question->content, 73)}}</p>
                                             <a href="/thread_no_login/{{$question->id}}" class="btn btn-primary">Read More</a>
                                         </div>                          
                                     </div>
