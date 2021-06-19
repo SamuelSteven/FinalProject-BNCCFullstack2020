@@ -21,7 +21,7 @@ class CreateRepliesTable extends Migration
             $table->unsignedBigInteger('answerId');
 
             $table->foreign('userId')->references('id')->on('users');
-            $table->foreign('answerId')->references('id')->on('answers');
+            $table->foreign('answerId')->references('id')->on('answers')->onDelete('cascade');
         });
     }
 

@@ -17,10 +17,17 @@ class WelcomeController extends Controller
     {
         $questions = question::all();
         $questions_count = NULL;
-        foreach($questions as $q){
-            $questions_time[] = $q->created_at->diffForHumans();
+        $questions_available = $questions->count();
+        if($questions_available > 0){
+            foreach($questions as $q){
+                $questions_time[] = $q->created_at->diffForHumans();
+            }
         }
-        return view('welcome',compact('questions','questions_count','questions_time'));
+        else{
+            $questions_time = NULL;
+        }
+        
+        return view('welcome',compact('questions', 'questions_count', 'questions_time', 'questions_available'));
     }
 
     /**

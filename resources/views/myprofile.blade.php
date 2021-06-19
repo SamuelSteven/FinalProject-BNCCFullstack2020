@@ -2,53 +2,57 @@
 
 @section('content')
     <style>
-        h5{
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+        *{
+            font-family: 'Montserrat';
+        }
+        h3{
             text-align: center;
         }
         .icon{
             text-align: center;
         }
+        .text{
+            font-size: 16px;
+        }
         .photo{
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             text-align: center;
             object-fit: cover;
+        }
+        .button{
+            box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.2);
         }
     </style>
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="card" style="width: 55rem">
+            <div class="card" style="width: 69rem">
                 <div class="card-body">
-                    <h5 class="card-title">My Profile</h5>
+                    <h3 class="card-title mt-2 mb-3">My Profile</h3>
                     @if($users->photo == NULL)
-                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{asset('images/profile-placeholder.png')}}" alt="">
+                        <img class="rounded mx-auto d-block img-thumbnail rounded-circle photo" src="{{asset('images/profile-placeholder.png')}}" alt="">
                     @else
-                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{'/images/'.$users->photo}}" alt="">
+                        <img class="rounded mx-auto d-block img-thumbnail rounded-circle photo" src="{{'/images/'.$users->photo}}" alt="">
                     @endif
                     <div class="icon">
-                        <span class="d-inline-block">
-                            <i class="fas fa-at"></i>
-                        </span>
-                        <span class="d-inline-block">{{$users->username}}</span>
+                        <i class="fas fa-at mt-2"></i>
+                        <p class="text">{{$users->username}}</p>
                     </div>
                     
                     <div class="icon">
-                        <span class="d-inline-block">
-                            <i class="fas fa-user"></i>
-                        </span>
-                        <span class="d-inline-block">{{$users->name}}</span>
+                        <i class="fas fa-user mt-2"></i>
+                        <p class="text">{{$users->name}}</p>
                     </div>
                     
                     <div class="icon">
-                        <span class="d-inline-block">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <span class="d-inline-block">{{$users->email}}</span>
+                        <i class="fas fa-envelope mt-2"></i>
+                        <p class="text">{{$users->email}}</p>
                     </div>
                     
                     <div class="text-center">
-                        <a href="/settings/{{$users->id}}" class="btn btn-primary">Settings</a>
+                        <a href="/settings/{{$users->id}}" class="btn btn-primary mt-3 text button">Settings</a>
                     </div>
                     
                 </div>

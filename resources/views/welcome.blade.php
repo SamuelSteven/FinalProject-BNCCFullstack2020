@@ -96,18 +96,20 @@
                             <h4 class="mt-3 d-none" id="results">{{$questions_count}} results</h4>
                         @endif
                         <div class="row">
-                            @foreach($questions as $key => $question)
-                                <div class="col-md-4 mt-3">
-                                    <div class="card" id="question-card" style="width: 20rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$question->title}}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
-                                            <p class="card-text">{{Str::limit($question->content, 73)}}</p>
-                                            <a href="/thread_no_login/{{$question->id}}" class="btn btn-primary">Read More</a>
-                                        </div>                          
+                            @if($questions_available > 0)
+                                @foreach($questions as $key => $question)
+                                    <div class="col-md-4 mt-3">
+                                        <div class="card" id="question-card" style="width: 20rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{$question->title}}</h5>
+                                                <h6 class="card-subtitle mb-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
+                                                <p class="card-text">{{Str::limit($question->content, 73)}}</p>
+                                                <a href="/thread_no_login/{{$question->id}}" class="btn btn-primary">Read More</a>
+                                            </div>                          
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

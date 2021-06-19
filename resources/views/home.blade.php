@@ -106,21 +106,23 @@
                     <h4 class="mt-4 d-none" id="results">{{$questions_count}} results</h4>
                 @endif
                 <div class="row">
-                    @foreach($questions as $key => $question)
-                        <div class="col-md-4 mt-4">
-                            <div class="card" id="question-card" style="width: 20rem;">
-                                <div class="card-body">
-                                    <h5 class="card-title d-inline">{{$question->title}}</h5>
-                                    @if ($question->status == "false")
-                                        <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
-                                    @endif
-                                    <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
-                                    <p class="card-text">{{Str::limit($question->content, 73)}}</p>
-                                    <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
-                                </div>                          
+                    @if($questions_available > 0)
+                        @foreach($questions as $key => $question)
+                            <div class="col-md-4 mt-4">
+                                <div class="card" id="question-card" style="width: 20rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title d-inline">{{$question->title}}</h5>
+                                        @if ($question->status == "false")
+                                            <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
+                                        @endif
+                                        <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
+                                        <p class="card-text">{{Str::limit($question->content, 73)}}</p>
+                                        <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
+                                    </div>                          
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
