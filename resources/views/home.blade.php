@@ -40,6 +40,9 @@
         .grid-item{
             padding:20px;
         }
+        h4{
+            color:white;
+        }
     </style>
 
     <!-- PopUp Status -->
@@ -109,15 +112,15 @@
                     @if($questions_available > 0)
                         @foreach($questions as $key => $question)
                             <div class="col-md-4 mt-4">
-                                <div class="card" id="question-card" style="width: 20rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title d-inline">{{$question->title}}</h5>
+                                <div class="card" id="question-card" style="width: 20rem; height: 200px">
+                                    <div class="card-body d-flex flex-column">
                                         @if ($question->status == "false")
-                                            <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
+                                            <span class="card-text text-danger">Thread already closed</span>
                                         @endif
+                                        <h5 class="card-title">{{$question->title}}</h5>
                                         <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
                                         <p class="card-text">{{Str::limit($question->content, 73)}}</p>
-                                        <a href="/home/{{$question->id}}" class="btn btn-primary">Read More</a>
+                                        <a href="/home/{{$question->id}}" class="mt-auto btn btn-primary" style="width:120px;">Read More</a>
                                     </div>                          
                                 </div>
                             </div>

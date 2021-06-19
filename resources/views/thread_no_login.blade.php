@@ -30,7 +30,7 @@
     <style>
         html, body {
             /* #1f3e75 */
-            background-color: #fff; 
+            background-color: #1f3e75; 
             color: #000;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
@@ -78,6 +78,15 @@
         #reply_card{
             margin-left: 110px;
         }
+        .navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link, .links > a{
+                color: white;
+        }
+        .navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link.active:hover, .navbar-light .navbar-nav .show>.nav-link:hover, .links > a:hover{
+            color:#f0f0f0;
+        }
+        h5{
+            color:white;
+        }
     </style>
 </head>
 <body>
@@ -97,8 +106,8 @@
                         <a href="register" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
                     </li>
                 </ul>
-            <form class="d-flex mr-5">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex mr-5" method="GET" action="{{url('/search')}}">
+                <input class="form-control" type="search" placeholder="Search" name="keyword" aria-label="Search">
                 <button class="btn btn-outline-info me-5" type="submit">Search</button>
             </form>
             @if (Route::has('login'))

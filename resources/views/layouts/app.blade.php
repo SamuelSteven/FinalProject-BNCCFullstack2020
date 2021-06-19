@@ -27,19 +27,16 @@
         <!-- Styles -->
         <style>
             html, body {
-                /* #1f3e75 */
-                background-color: #fff; 
+                background-color: #1f3e75; 
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
             }
-
             .content {
                 text-align: center;
             }
-
             .links > a {
                 color: #000;
                 padding: 0 25px;
@@ -50,6 +47,7 @@
                 text-transform: uppercase;
             }
             .navbar{
+                color: white;
                 width: 65%;
                 margin-left:auto;
                 margin-right: auto;
@@ -57,6 +55,12 @@
             }
             #greetings{
                 margin-bottom: 5px;
+            }
+            .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link{
+                color: white;
+            }
+            .navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link.active:hover, .navbar-light .navbar-nav .show>.nav-link:hover{
+                color:#f0f0f0;
             }
         </style>
     </head>

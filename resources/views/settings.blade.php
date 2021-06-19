@@ -8,6 +8,9 @@
         h3{
             color: white;
         }
+        .container{
+            width:35.2%;
+        }
         #form_action{
             width: 90%;
             margin-left:auto;
@@ -27,7 +30,9 @@
             margin-right:auto;
         }
         .button{
-            width: 150px;
+            width: 179px;
+            height: 40px;
+            padding: 8px;
         }
         .width{
             width: 415px;
@@ -36,27 +41,38 @@
             background-color: white;
             color: #5e72e4;
         }
+        .button .fas{
+            color: #5e72e4;
+        }
         .button:focus{
             background-color: #5e72e4;
             color: white;
         }
-        .button:focus + .fa{
+        .button:focus .fas{
             color: white;
+        }
+        #active{
+            background-color: #5e72e4; 
+            color: white; 
+            font-weight: bold;
+        }
+        #active:hover{
+            box-shadow: 1px 1px 7px #888888;
         }
     </style>
 
     <div class="container">
         <div class="row justify-content-center">
-            <h3 class="card-title text-center mb-3">Settings</h3>
+            <h3 class="card-title mb-3">Settings</h3>
             <div class="text-center">
                 <a href="#" class="btn mx-1 mt-3 mb-3 button" onclick="show_profile()">
-                    <i class="fas fa-user" style="color: #5e72e4"></i>  Profile
+                    <i class="fas fa-user"></i> Profile
                 </a>
                 <a href="#" class="btn mx-1 mt-3 mb-3 button" onclick="show_avatar()">
-                    <i class="fas fa-cloud-upload-alt" style="color: #5e72e4"></i>  Avatar
+                    <i class="fas fa-cloud-upload-alt"></i> Avatar
                 </a>
                 <a href="#" class="btn mx-1 mt-3 mb-3 button" onclick="show_password()">
-                    <i class="fas fa-unlock-alt" style="color: #5e72e4"></i>  Password
+                    <i class="fas fa-unlock-alt"></i> Password
                 </a>
             </div>
             <div class="card" style="width: 35rem">
@@ -71,7 +87,7 @@
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="background-color: white">
-                                        <i class="fas fa-user" style="color: #a7adb2"></i>
+                                        <i class="fa fa-user" style="color: #a7adb2"></i>
                                     </span>
                                     <input class="form-control width" type="text" id="name" value="{{$users->name}}" name="name" class="form-control @error('name') is-invalid @enderror">
                                 </div>
@@ -111,7 +127,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
 
-                        <button type="submit" class="btn my-3 mb-4 justify" id="active1" style="background-color: #5e72e4; color: white">UPDATE PROFILE</button>
+                        <button type="submit" class="btn my-3 mb-4 justify" id="active">UPDATE PROFILE</button>
                     </form>
 
                     <!-- Avatar -->
@@ -123,7 +139,7 @@
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                         </div>
 
-                        <button type="submit" class="btn" id="active2" style="background-color: #5e72e4; color: white">UPLOAD</button>
+                        <button type="submit" class="btn" id="active">UPLOAD</button>
                     </form>
 
                     <!-- Password -->
@@ -173,7 +189,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
 
-                        <button type="submit" class="btn my-3 mb-4" id="active3" style="background-color: #5e72e4; color: white">CHANGE PASSWORD</button> 
+                        <button type="submit" class="btn my-3 mb-4" id="active">CHANGE PASSWORD</button> 
                    </form>
                 </div>
             </div>

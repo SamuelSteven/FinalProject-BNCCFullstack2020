@@ -54,6 +54,9 @@
         #reply_card{
             margin-left: 110px;
         }
+        h5, h4 .comment, .comment{
+            color:white;
+        }
     </style>
 
     <!-- PopUp Edit Question -->
@@ -253,8 +256,8 @@
                 <form method="POST" action="/answer" style="width: 65rem;">
                     @csrf
                     <div class="form">
-                        <h4 class="mb-2">Write a Comment</h4>
-                        <label for="content" class="mt-4">Have any thoughts?</label>
+                        <h4 class="comment mb-2">Write a Comment</h4>
+                        <label for="content" class="comment mt-4">Have any thoughts?</label>
                         <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Enter Your Answer Here" id="content" style="height: 150px" name="content"></textarea>
                         @error('content')
                             <div class="invalid-feedback">{{$message}}</div>

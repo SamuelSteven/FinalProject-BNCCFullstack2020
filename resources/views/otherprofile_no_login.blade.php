@@ -31,7 +31,7 @@
         <style>
             html, body {
                 /* #1f3e75 */
-                background-color: #fff; 
+                background-color: #1f3e75; 
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -90,6 +90,15 @@
                 height: 100px;
                 text-align: center;
                 object-fit: cover;
+            }
+            .navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link, .links > a{
+                color: white;
+            }
+            .navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link.active:hover, .navbar-light .navbar-nav .show>.nav-link:hover, .links > a:hover{
+                color:#f0f0f0;
+            }
+            h5{
+                color:white;
             }
         </style>
     </head>
