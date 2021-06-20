@@ -60,7 +60,8 @@ class HomeController extends Controller
         foreach($question as $q){
             $questions_time[] = $q->created_at->diffForHumans();
         }
+        $questions_available = $questions_count;
 
-        return view("home", compact('questions', 'questions_count','questions_time'));
+        return view("home", compact('questions', 'questions_count','questions_time','questions_available'));
     }
 }

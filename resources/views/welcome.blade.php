@@ -30,7 +30,7 @@
         <style>
             html, body {
                 /* #1f3e75 */
-                background-color: #fff; 
+                background-color: #1f3e75; 
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -39,7 +39,7 @@
             }
 
             .links > a {
-                color: #000;
+                color: #fff;
                 padding: 0 10px;
                 text-decoration: none;
             }
@@ -48,6 +48,15 @@
                 margin-left:auto;
                 margin-right: auto;
                 margin-top:20px;
+            }
+            .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link{
+                color: white;
+            }
+            .navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link:hover, .links > a:hover{
+                color:#f0f0f0;
+            }
+            h4{
+                color:white;
             }
           </style>
     </head>
@@ -99,12 +108,15 @@
                             @if($questions_available > 0)
                                 @foreach($questions as $key => $question)
                                     <div class="col-md-4 mt-3">
-                                        <div class="card" id="question-card" style="width: 20rem;">
-                                            <div class="card-body">
+                                        <div class="card" id="question-card" style="width: 20rem; height: 200px">
+                                            <div class="card-body d-flex flex-column">
+                                                @if ($question->status == "false")
+                                                    <span class="card-text text-danger">Thread already closed</span>
+                                                @endif
                                                 <h5 class="card-title">{{$question->title}}</h5>
                                                 <h6 class="card-subtitle mb-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
                                                 <p class="card-text">{{Str::limit($question->content, 73)}}</p>
-                                                <a href="/thread_no_login/{{$question->id}}" class="btn btn-primary">Read More</a>
+                                                <a href="/thread_no_login/{{$question->id}}" class="mt-auto btn btn-primary" style="width:120px;">Read More</a>
                                             </div>                          
                                         </div>
                                     </div>

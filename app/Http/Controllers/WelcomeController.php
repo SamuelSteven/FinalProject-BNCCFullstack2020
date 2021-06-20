@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\question;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
 {
@@ -15,19 +16,35 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        $questions = question::all();
-        $questions_count = NULL;
-        $questions_available = $questions->count();
-        if($questions_available > 0){
-            foreach($questions as $q){
-                $questions_time[] = $q->created_at->diffForHumans();
+        if (Auth::check()) {
+            $questions = question::all();
+            $questions_count = NULL;
+            $questions_available = $questions->count();
+            if($questions_available > 0){
+                foreach($questions as $q){
+                    $questions_time[] = $q->created_at->diffForHumans();
+                }
             }
+            else{
+                $questions_time = NULL;
+            }
+            
+            return view('home',compact('questions', 'questions_count', 'questions_time', 'questions_available'));
+        } else{
+            $questions = question::all();
+            $questions_count = NULL;
+            $questions_available = $questions->count();
+            if($questions_available > 0){
+                foreach($questions as $q){
+                    $questions_time[] = $q->created_at->diffForHumans();
+                }
+            }
+            else{
+                $questions_time = NULL;
+            }
+            
+            return view('welcome',compact('questions', 'questions_count', 'questions_time', 'questions_available'));
         }
-        else{
-            $questions_time = NULL;
-        }
-        
-        return view('welcome',compact('questions', 'questions_count', 'questions_time', 'questions_available'));
     }
 
     /**
@@ -68,8 +85,9 @@ class WelcomeController extends Controller
         foreach($question as $q){
             $questions_time[] = $q->created_at->diffForHumans();
         }
+        $questions_available = $questions_count;
 
-        return view("welcome", compact('questions', 'questions_count', 'questions_time'));
+        return view("welcome", compact('questions', 'questions_count', 'questions_time','questions_available'));
     }
 
     /**
