@@ -112,7 +112,7 @@
                     @if($questions_available > 0)
                         @foreach($questions as $key => $question)
                             <div class="col-md-4 mt-4">
-                                <div class="card" id="question-card" style="width: 20rem; height: 200px">
+                                <div class="card" id="question-card" style="width: 18rem; height: 200px">
                                     <div class="card-body d-flex flex-column">
                                         @if ($question->status == "false")
                                             <span class="card-text text-danger">Thread already closed</span>

@@ -8,8 +8,8 @@
         h3{
             color: white;
         }
-        .container{
-            width:35.2%;
+        .setting{
+            width:50%;
         }
         #form_action{
             width: 90%;
@@ -61,7 +61,7 @@
         }
     </style>
 
-    <div class="container">
+    <div class="container setting">
         <div class="row justify-content-center">
             <h3 class="card-title mb-3">Settings</h3>
             <div class="text-center">
@@ -133,7 +133,7 @@
                     <!-- Avatar -->
                     <form method="POST" action="/settingsPhoto" enctype="multipart/form-data" id="form_upload" class="form-photo d-none">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group" style="height: 20rem;">
                             <h4 class="text-center">Upload photo</h4>
                             <input type="file" class="form-control-file text-center" id="photo" name="photo">
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">

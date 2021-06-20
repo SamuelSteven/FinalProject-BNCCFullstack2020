@@ -2,15 +2,18 @@
 
 @section('content')
     <style>
-        h5{
+        h3{
             text-align: center;
         }
         .icon{
             text-align: center;
         }
+        .text{
+            font-size: 16px;
+        }
         .photo{
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             text-align: center;
             object-fit: cover;
         }
@@ -18,33 +21,27 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="card" style="width: 55rem">
+            <div class="card" style="width: 69rem">
                 <div class="card-body">
-                    <h5 class="card-title">Profile</h5>
+                    <h3 class="card-title mt-2 mb-3">Profile</h3>
                     @if($users->photo == NULL)
-                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{asset('images/profile-placeholder.png')}}" alt=""/>
+                        <img class="rounded mx-auto d-block img-thumbnail rounded-circle photo" src="{{asset('images/profile-placeholder.png')}}" alt=""/>
                     @else
-                        <img class="rounded mx-auto d-block img-thumbnail photo" src="{{'/images/'.$users->photo}}" alt=""/>
+                        <img class="rounded mx-auto d-block img-thumbnail rounded-circle photo" src="{{'/images/'.$users->photo}}" alt=""/>
                     @endif
                     <div class="icon">
-                        <span class="d-inline-block">
-                            <i class="fas fa-at"></i>
-                        </span>
-                        <span class="d-inline-block">{{$users->username}}</span>
+                        <i class="fas fa-at mt-2"></i>
+                        <p class="text">{{$users->username}}</p>
                     </div>
                     
                     <div class="icon">
-                        <span class="d-inline-block">
-                            <i class="fas fa-user"></i>
-                        </span>
-                        <span class="d-inline-block">{{$users->name}}</span>
+                        <i class="fas fa-user mt-2"></i>
+                        <p class="text">{{$users->name}}</p>
                     </div>
                     
                     <div class="icon">
-                        <span class="d-inline-block">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <span class="d-inline-block">{{$users->email}}</span>
+                        <i class="fas fa-envelope mt-2"></i>
+                        <p class="text">{{$users->email}}</p>
                     </div>
                     
                 </div>

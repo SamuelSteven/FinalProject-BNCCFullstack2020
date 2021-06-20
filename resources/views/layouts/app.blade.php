@@ -31,8 +31,9 @@
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
+                height: 100%;
                 margin: 0;
+                padding: 0;
             }
             .content {
                 text-align: center;
@@ -48,7 +49,7 @@
             }
             .navbar{
                 color: white;
-                width: 65%;
+                width: 80%;
                 margin-left:auto;
                 margin-right: auto;
                 margin-top:20px;
@@ -61,6 +62,14 @@
             }
             .navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link.active:hover, .navbar-light .navbar-nav .show>.nav-link:hover{
                 color:#f0f0f0;
+            }
+            footer{
+                padding: 1rem 0;
+                background-color: #f4f5f7;
+                position: relative;
+                left: 0;
+                bottom: 0;
+                width: 100%;
             }
         </style>
     </head>
@@ -125,6 +134,24 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="mt-5">
+            <div class="container">
+                <div class="row align-items-center justify-content-md-between">
+                    <div class="col-md-6">
+                        <div class="ml-3">© 2021 Forum Sunib.</div>
+                    </div>
+    
+                    <div class="col-md-6">
+                        <ul class="nav nav-footer justify-content-end">
+                            <li class="nav-item"><a href="/home" class="nav-link mr-3">Home</a></li>
+                            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link mr-3">Login</a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link mr-3">Register</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+        </footer>
     </body>
 </html>
 
