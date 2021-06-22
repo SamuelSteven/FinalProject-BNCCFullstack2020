@@ -106,6 +106,14 @@
                 text-align: center;
                 object-fit: cover;
             }
+            .searchBtn{
+                border: 1.5px solid #cfe2ff;
+                color: #cfe2ff;
+            }
+            .searchBtn:hover{
+                background-color: #cfe2ff;
+                color: black;
+            }
         </style>
     </head>
     <body>
@@ -127,7 +135,7 @@
                     </ul>
                 <form class="d-flex mr-5">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-info me-5" type="submit">Search</button>
+                    <button class="btn searchBtn me-5" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 @if (Route::has('login'))
                     <div class="top-right links">

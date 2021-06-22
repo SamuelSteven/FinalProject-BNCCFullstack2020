@@ -40,8 +40,17 @@
         .grid-item{
             padding:20px;
         }
-        h4{
-            color:white;
+        .buttonAdd{
+            background-color: #2dce89;
+            color: white;
+        }
+        .readBtn{
+            background-color: #5e72e4;
+            color: white;
+        }
+        .readBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
         }
     </style>
 
@@ -70,21 +79,21 @@
             <form method="POST" action="/home">
             @csrf
                 <div class="mb-3">
-                    <h4 class="mb-3">Have Any Questions?</h4>
+                    <h4 class="mb-3">What is Your Question?</h4>
                     <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close"></button>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter the Question Title" name="title" value="{{old('title')}}">
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Your Question's Title" name="title" value="{{old('title')}}">
                     @error('title')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="form">
-                    <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Enter the Question Content" id="content" style="height: 150px" name="content" value="{{old('content')}}"></textarea>
+                    <textarea class="form-control @error('content') is-invalid @enderror" placeholder="What is Your Question?" id="content" style="height: 150px" name="content" value="{{old('content')}}"></textarea>
                     @error('content')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-                <button type="submit" class="btn btn-primary my-3">Add Question!</button>
+                <button type="submit" class="buttonAdd btn my-3">ADD QUESTION!</button>
             </form>
         </div>
     </div>
@@ -122,11 +131,12 @@
                                         <h5 class="card-title">{{$question->title}}</h5>
                                         <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
                                         <p class="card-text">{{Str::limit($question->content, 73)}}</p>
+
                                         <div class="mt-auto mb-3 comment d-inline-flex" style="color: #f5365c;">
                                             <i class="fa fa-comments mr-2"></i>
                                             <p class="card-text">{{$total_comment[$key]}}</p>
                                         </div>
-                                        <a href="/home/{{$question->id}}" class="btn btn-primary" style="width:120px;">Read More</a>
+                                        <a href="/home/{{$question->id}}" class="btn readBtn" style="width:120px;">Read More</a>
                                     </div>                          
                                 </div>
                             </div>

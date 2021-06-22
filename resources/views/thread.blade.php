@@ -61,6 +61,46 @@
             color:white;
             border-top: 2px solid #fff;
         }
+        .editQuestionBtn{
+            background-color: #2dce89;
+            color: white;
+        }
+        .editBtn{
+            background-color: #5e72e4;
+            color: white;
+        }
+        .editBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
+        }
+        .deleteBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
+        }
+        .closeBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
+        }
+        .openBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
+        }
+        .replyBtn{
+            background-color: #5e72e4;
+            color: white;
+        }
+        .replyBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
+        }
+        .postBtn{
+            background-color: #5e72e4;
+            color: white;
+        }
+        .postBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
+        }
     </style>
 
     <!-- PopUp Edit Question -->
@@ -72,13 +112,13 @@
                 <div class="mb-3">
                     <h4 class="mb-3">Edit your Question</h4>
                     <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close"></button>
-                    <label for="title" style="margin-left:-440px;">Title of Question</label>
+                    <label for="title" style="margin-left:-440px;">Question's Title</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter the Question Title" name="title" value="{{$questions->title}}">
                     @error('title')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <label for="content-textbox" style="margin-left:-420px;">Content of Question</label>
+                <label for="content-textbox" style="margin-left:-420px;">Question's Content</label>
                 <div class="form">
                     <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Enter the Question Content" id="content-textbox" style="height: 150px" name="content" value="{{old('content')}}">{{$questions->content}}</textarea>
                     @error('content')
@@ -87,7 +127,7 @@
                 </div>
                 <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="status" value="{{$questions->status}}">
-                <button type="submit" class="btn btn-primary my-3">Edit Question!</button>
+                <button type="submit" class="btn editQuestionBtn my-3">Edit Question!</button>
             </form>
         </div>
     </div>
@@ -110,25 +150,25 @@
                     <p class="card-text">{{$questions->content}}</p>
                     @if($questions->users['id'] == Auth::user()->id)
                         @if($questions->status == "true")
-                            <a href="#" class="btn btn-primary" id="edit">Edit</a>
+                            <a href="#" class="btn editBtn" id="edit">Edit</a>
 
                             <form class="d-inline"method="POST" action="/home/{{$questions->id}}">
                             @method('delete')
                             @csrf
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger deleteBtn">Delete</button>
                             </form>
 
                             <form class="d-inline"method="POST" action="/home/thread/{{$questions->id}}">
                             @method('patch')
                             @csrf
-                                <button type="submit" class="btn btn-dark">Close Thread</button>
+                                <button type="submit" class="btn btn-dark closeBtn">Close Thread</button>
                                 <input type="hidden" name="status" value="false">
                             </form>
                         @else
                             <form class="d-inline"method="POST" action="/home/thread/{{$questions->id}}">
                             @method('patch')
                             @csrf
-                                <button type="submit" class="btn btn-dark">Open Thread</button>
+                                <button type="submit" class="btn btn-dark openBtn">Open Thread</button>
                                 <input type="hidden" name="status" value="true">
                             </form>
                             <form class="d-inline"method="POST" action="/home/{{$questions->id}}">
@@ -158,15 +198,15 @@
                             <p class="card-text my-4">{{ $a->content }}</p>
 
                             @if($questions->status == "true")
-                                <a href="#replycard" class="btn btn-info mx-1 mt-3" onclick="reply( {{$a->id}}, {{$key}});">Reply</a>
+                                <a href="#replycard" class="btn replyBtn mx-1 mt-3" onclick="reply( {{$a->id}}, {{$key}});">Reply</a>
                             @endif
 
                             @if($a->user['id'] == Auth::user()->id && $questions->status == "true")
-                                <a href="#answercard" class="btn btn-primary mx-1 mt-3" onclick="display(`{{$a->content}}`, {{$a->id}}, {{$key}});">Edit</a>
+                                <a href="#answercard" class="btn editBtn mx-1 mt-3" onclick="display(`{{$a->content}}`, {{$a->id}}, {{$key}});">Edit</a>
                                 <form action="/answer/{{$a->id}}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger mt-3">Delete</button>
+                                    <button type="submit" class="btn btn-danger deleteBtn mt-3">Delete</button>
                                 </form>
                             @endif
                         </div>
@@ -184,8 +224,8 @@
                             @enderror
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="questionId" value="{{ $questions->id }}">
-                            <button type="submit" class="btn btn-primary my-3">Edit Your Answer!</button>
-                            <a href="#edit" class="card-link mx-2 text-decoration-none" onclick="hide({{$key}});">Cancel</a>
+                            <button type="submit" class="btn editBtn my-3">Edit Your Answer!</button>
+                            <a href="#edit" class="btn btn-danger mx-2 text-decoration-none" onclick="hide({{$key}});">Cancel</a>
                         </div>
                     </form>
 
@@ -193,15 +233,15 @@
                     <form method="POST" action="/reply" id="form_actions">
                         @csrf
                         <div class="form d-none" id="reply" style="width:65rem;">
-                            <label for="content" style="margin-top:-9px;">Edit Your Reply Here</label>
+                            <label for="content" style="margin-top:-9px; color: white">Edit Your Reply Here</label>
                             <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Reply Here" id="content" style="height: 150px" name="content"></textarea>
                             @error('content')
                                 <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="answerId" value="{{ $a->id }}">
-                            <button type="submit" class="btn btn-primary my-3">Add Reply!</button>
-                            <a href="#reply" class="card-link mx-2 text-decoration-none" onclick="hideReply({{$key}});">Cancel</a>
+                            <button type="submit" class="btn replyBtn my-3">Add Reply!</button>
+                            <a href="#reply" class="btn btn-danger closeBtn mx-2 text-decoration-none" onclick="hideReply({{$key}});">Cancel</a>
                         </div>
                     </form>
 
@@ -223,11 +263,11 @@
                                     <p class="card-text my-4">{{ $r->content }}</p>
 
                                     @if($r->user_reply['id'] == Auth::user()->id && $questions->status == "true")
-                                        <a href="#replycard" class="btn btn-primary mx-1 mt-3" onclick="displayReply(`{{$r->content}}`, {{$r->id}}, {{$keys}});">Edit</a>
+                                        <a href="#replycard" class="btn editBtn mx-1 mt-3" onclick="displayReply(`{{$r->content}}`, {{$r->id}}, {{$keys}});">Edit</a>
                                         <form action="/reply/{{$r->id}}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger mt-3">Delete</button>
+                                            <button type="submit" class="btn btn-danger deleteBtn mt-3">Delete</button>
                                         </form>
                                     @endif
                                 </div>
@@ -245,8 +285,8 @@
                                     @enderror
                                     <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="answerId" value="{{ $a->id }}">
-                                    <button type="submit" class="btn btn-primary my-3">Edit Your Reply!</button>
-                                    <a href="#edit" class="card-link mx-2 text-decoration-none" onclick="hideReply1({{$key}});">Cancel</a>
+                                    <button type="submit" class="btn repltBtn my-3">Edit Your Reply!</button>
+                                    <a href="#edit" class="btn btn-danger closeBtn mx-2 text-decoration-none" onclick="hideReply1({{$key}});">Cancel</a>
                                 </div>
                             </form>
                         @endforeach
@@ -269,7 +309,7 @@
                     </div>
                     <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="questionId" value="{{ $questions->id }}">
-                    <button type="submit" class="btn btn-primary my-3">Post Your Answer!</button>
+                    <button type="submit" class="btn postBtn my-3">Post Your Answer!</button>
                 </form>
             @endif
         </div>
