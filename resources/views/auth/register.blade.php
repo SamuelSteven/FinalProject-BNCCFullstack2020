@@ -26,16 +26,18 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/87bc1c7077.js" crossorigin="anonymous"></script>
 
     <style>
         html, body {
             /* #1f3e75 */
-            background-color: #fff; 
+            background-color: #1f3e75; 
             color: #000;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
-            height: 100vh;
+            height: 100%;
             margin: 0;
+            padding: 0;
         }
 
         .content {
@@ -43,21 +45,81 @@
         }
 
         .links > a {
-            color: #000;
-            padding: 0 10px;
+            color: white;
+            padding: 0 25px;
+            font-size: 16px;
             text-decoration: none;
         }
         .navbar{
-            width: 65%;
+            color: white;
+            width: 80%;
             margin-left:auto;
             margin-right: auto;
             margin-top:20px;
+        }
+        .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link{
+            color: white;
+        }
+        .navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link.active:hover, .navbar-light .navbar-nav .show>.nav-link:hover{
+            color:#f0f0f0;
+        }
+        .card{
+            background-color: #f4f5f7;
+        }
+        .width{
+            width: 415px;
+        }
+        .register{
+            width: 90%;
+        }
+        #registerCard{
+            width: 90%;
+            margin-left:auto;
+            margin-right:auto;
+            color: gray;
+        }
+        footer{
+            padding: 1rem 0;
+            background-color: #f4f5f7;
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        footer ul li a{
+            text-decoration: none;
+            color: black;
+        }
+        #register{
+            background-color: white;
+            color: #5e72e4;
+            font-size: .875rem;
+        }
+        #register:hover{
+            color: black;
+            box-shadow: 1px 1px 7px #888888;
+        }
+        .regisBtn{
+            background-color: #5e72e4;
+            color: white;
+        }
+        .regisBtn:hover{
+            color: white;
+            box-shadow: 1px 1px 7px #888888;
+        }
+        .searchBtn{
+            border: 1.5px solid #cfe2ff;
+            color: #cfe2ff;
+        }
+        .searchBtn:hover{
+            background-color: #cfe2ff;
+            color: black;
         }
     </style>
 </head>
 <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light navbar">
+    <nav class="navbar navbar-expand-lg navbar-light navbar mb-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{url('/')}}">Forum Sunib</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,12 +131,16 @@
                         <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="register" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
+                        <a href="register" class="btn ml-4" id="register">
+                            <span>
+                                <i class="fas fa-user-plus mr-1"></i>REGISTER
+                            </span>    
+                        </a>
                     </li>
                 </ul>
             <form class="d-flex mr-5">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-info me-5" type="submit">Search</button>
+                <button class="btn searchBtn me-5" type="submit"><i class="fas fa-search"></i></button>
             </form>
             <div class="flex-center ml-auto">
                     @if (Route::has('login'))
@@ -90,93 +156,129 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container register">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
-
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                                    @error('username')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+            <div class="card mb-5" style="width: 35rem">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" id="registerCard">
+                        @csrf
+                        <h4 class="text-center mt-4">Register</h4>
+                        <div class="form-group">
+                            <label for="username">{{ __('Username') }}</label>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white">
+                                        <i class="fa fa-at" style="color: gray"></i>
+                                    </span>
+                                    <input id="username" type="text" class="form-control width @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                        <div class="form-group">
+                            <label for="name">{{ __('Name') }}</label>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white">
+                                        <i class="fa fa-user" style="color: gray"></i>
+                                    </span>
+                                    <input id="name" type="text" class="form-control width @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                        <div class="form-group">
+                            <label for="email">{{ __('E-Mail Address') }}</label>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white">
+                                        <i class="fa fa-envelope" style="color: gray"></i>
+                                    </span>
+                                    <input id="email" type="email" class="form-control width @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                        <div class="form-group">
+                            <label for="password">{{ __('Password') }}</label>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white">
+                                        <i class="fas fa-unlock-alt" style="color: gray"></i>
+                                    </span>
+                                    <input id="password" type="password" class="form-control width @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <div class="form-group">
+                            <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white">
+                                        <i class="fas fa-unlock-alt" style="color: gray"></i>
+                                    </span>
+                                    <input id="password-confirm" type="password" class="form-control width" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="form-group text-center"> 
+                            <button type="submit" class="btn regisBtn">
+                                {{ __('Register') }}
+                            </button>   
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row align-items-center justify-content-md-between">
+                <div class="col-md-6">
+                    <div class="ml-3">© 2021 Forum Sunib.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <ul class="nav nav-footer justify-content-end">
+                        <li class="nav-item"><a href="/home" class="mr-3">Home</a></li>
+                        <li class="nav-item"><a href="{{ route('login') }}" class="mr-3">Login</a></li>
+                        <li class="nav-item"><a href="{{ route('register') }}" class="mr-3">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div> 
+    </footer>
 </body>
 </html>
 

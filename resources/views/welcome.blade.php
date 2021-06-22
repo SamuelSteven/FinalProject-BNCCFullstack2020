@@ -25,6 +25,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/87bc1c7077.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
         <style>
@@ -58,6 +59,43 @@
             h4{
                 color:white;
             }
+            footer{
+                padding: 1rem 0;
+                background-color: #f4f5f7;
+                position: relative;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+            }
+            footer ul li a{
+                text-decoration: none;
+                color: black;
+            }
+            #register{
+                background-color: white;
+                color: #5e72e4;
+                font-size: .875rem;
+            }
+            #register:hover{
+                color: black;
+                box-shadow: 1px 1px 7px #888888;
+            }
+            .readBtn{
+                background-color: #5e72e4;
+                color: white;
+            }
+            .readBtn:hover{
+                color: white;
+                box-shadow: 1px 1px 7px #888888;
+            }
+            .searchBtn{
+                border: 1.5px solid #cfe2ff;
+                color: #cfe2ff;
+            }
+            .searchBtn:hover{
+                background-color: #cfe2ff;
+                color: black;
+            }
           </style>
     </head>
     <body>
@@ -74,12 +112,16 @@
                             <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('register') }}" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
+                            <a href="{{ route('register') }}" class="btn ml-4" id="register">
+                                <span>
+                                    <i class="fas fa-user-plus mr-1"></i>REGISTER
+                                </span> 
+                            </a>
                         </li>
                     </ul>
                 <form class="d-flex mr-5" method="GET" action="{{url('/search')}}">
                     <input class="form-control" type="search" placeholder="Search" name="keyword" aria-label="Search">
-                    <button class="btn btn-outline-info me-5" type="submit">Search</button>
+                    <button class="btn searchBtn me-5" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 @if (Route::has('login'))
                     <div class="top-right links">
@@ -116,7 +158,7 @@
                                                 <h5 class="card-title">{{$question->title}}</h5>
                                                 <h6 class="card-subtitle mb-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
                                                 <p class="card-text">{{Str::limit($question->content, 73)}}</p>
-                                                <a href="/thread_no_login/{{$question->id}}" class="mt-auto btn btn-primary" style="width:120px;">Read More</a>
+                                                <a href="/thread_no_login/{{$question->id}}" class="mt-auto btn readBtn" style="width:120px;">Read More</a>
                                             </div>                          
                                         </div>
                                     </div>
@@ -128,5 +170,22 @@
             </div>
         </div>
         
+        <footer class="mt-5">
+            <div class="container">
+                <div class="row align-items-center justify-content-md-between">
+                    <div class="col-md-6">
+                        <div class="ml-3">© 2021 Forum Sunib.</div>
+                    </div>
+    
+                    <div class="col-md-6">
+                        <ul class="nav nav-footer justify-content-end">
+                            <li class="nav-item"><a href="/home" class="mr-3">Home</a></li>
+                            <li class="nav-item"><a href="{{ route('login') }}" class="mr-3">Login</a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="mr-3">Register</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+        </footer>
     </body>
 </html>

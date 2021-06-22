@@ -71,6 +71,27 @@
                 bottom: 0;
                 width: 100%;
             }
+            footer ul li a{
+                text-decoration: none;
+                color: black;
+            }
+            #askbutton{
+                background-color: white;
+                color: #5e72e4;
+                font-size: .875rem;
+            }
+            #askbutton:hover{
+                color: black;
+                box-shadow: 1px 1px 7px #888888;
+            }
+            #search_button{
+                border: 1.5px solid #cfe2ff;
+                color: #cfe2ff;
+            }
+            #search_button:hover{
+                background-color: #cfe2ff;
+                color: black;
+            }
         </style>
     </head>
 
@@ -88,12 +109,16 @@
                             <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-primary ml-4 bg-info" id="askbutton">Ask Question</a>
+                            <a class="btn ml-4" id="askbutton">
+                                <span>
+                                    <i class="fa fa-paper-plane mr-1"></i>ASK QUESTION
+                                </span>
+                            </a>
                         </li>
                     </ul>
                 <form class="d-flex mr-5" method="GET" action="{{url('/home/search')}}">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
-                    <button class="btn btn-outline-info me-5" id="search_button" type="submit">Search</button>
+                    <button class="btn me-5" id="search_button" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -144,9 +169,9 @@
     
                     <div class="col-md-6">
                         <ul class="nav nav-footer justify-content-end">
-                            <li class="nav-item"><a href="/home" class="nav-link mr-3">Home</a></li>
-                            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link mr-3">Login</a></li>
-                            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link mr-3">Register</a></li>
+                            <li class="nav-item"><a href="/home" class="mr-3">Home</a></li>
+                            <li class="nav-item"><a href="{{ route('login') }}" class="mr-3">Login</a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="mr-3">Register</a></li>
                         </ul>
                     </div>
                 </div>
