@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -38,4 +40,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->redirectTo = url()->previous();
     }
+
+    public function logout($id)
+    {
+        $user = User::find($id);
+        $user->first_time_login = 1;
+        $user->save();
+
+        Auth::logout();
+        
+        return redirect('/');
+    }
+
 }

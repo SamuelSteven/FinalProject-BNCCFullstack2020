@@ -87,6 +87,10 @@
         h5{
             color:white;
         }
+        hr{
+            color:white;
+            border-top: 2px solid #fff;
+        }
     </style>
 </head>
 <body>

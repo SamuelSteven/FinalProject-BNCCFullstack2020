@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\question;
+use App\answer;
+use App\reply;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +19,14 @@ class WelcomeController extends Controller
     public function index()
     {
         if (Auth::check()) {
+            // First Time login
+            $first_time_login = false;
+            if (Auth::user()->first_time_login) {
+                $first_time_login = true;
+                Auth::user()->first_time_login = 0; 
+                Auth::user()->save();   
+            }
+            
             $questions = question::all();
             $questions_count = NULL;
             $questions_available = $questions->count();
@@ -28,8 +38,23 @@ class WelcomeController extends Controller
             else{
                 $questions_time = NULL;
             }
+
+            // Count total comment
+            $answers = answer::all();
+            foreach($answers as $key => $a){
+                $total_reply[$key] = count($a->answer_Reply);
+            }
+            $keys = 0;
+            foreach($questions as $key => $question){
+                if(count($question->answers) > 0){
+                    $total_comment[$key] = count($question->answers) + $total_reply[$keys];
+                    $keys += 1;
+                } else{
+                    $total_comment[$key] = 0;
+                }
+            }
             
-            return view('home',compact('questions', 'questions_count', 'questions_time', 'questions_available'));
+            return view('home',compact('questions', 'questions_count', 'questions_time', 'questions_available','total_comment','first_time_login'));
         } else{
             $questions = question::all();
             $questions_count = NULL;
@@ -42,8 +67,23 @@ class WelcomeController extends Controller
             else{
                 $questions_time = NULL;
             }
+
+            // Count total comment
+            $answers = answer::all();
+            foreach($answers as $key => $a){
+                $total_reply[$key] = count($a->answer_Reply);
+            }
+            $keys = 0;
+            foreach($questions as $key => $question){
+                if(count($question->answers) > 0){
+                    $total_comment[$key] = count($question->answers) + $total_reply[$keys];
+                    $keys += 1;
+                } else{
+                    $total_comment[$key] = 0;
+                }
+            }
             
-            return view('welcome',compact('questions', 'questions_count', 'questions_time', 'questions_available'));
+            return view('welcome',compact('questions', 'questions_count', 'questions_time', 'questions_available','total_comment'));
         }
     }
 
@@ -76,8 +116,7 @@ class WelcomeController extends Controller
      */
     public function show(Request $request)
     {
-        $questions = DB::table('questions')
-            ->where('title', 'like', '%' . $request->keyword .'%')
+        $questions = question::where('title', 'like', '%' . $request->keyword .'%')
             ->orWhere('content', 'like', '%' . $request->keyword .'%')
             ->get();
         $questions_count = $questions->count();
@@ -87,7 +126,28 @@ class WelcomeController extends Controller
         }
         $questions_available = $questions_count;
 
-        return view("welcome", compact('questions', 'questions_count', 'questions_time','questions_available'));
+        // Count total comment
+        foreach($questions as $key => $q){
+            $answers[] = answer::where('questionId', '=', $q->id)->get();
+        }
+        foreach($answers as $key => $a){
+            if($a->first()==NULL){
+                $total_reply[$key] = 0;
+            } else{
+                $total_reply[$key] = count($a->first()->answer_Reply);
+            }
+        }
+        $keys = 0;
+        foreach($questions as $key => $q){
+            if(count($q->answers) > 0){
+                $total_comment[$key] = count($q->answers) + $total_reply[$keys];
+                $keys += 1;
+            } else{
+                $total_comment[$key] = 0;
+            }
+        }
+
+        return view("welcome", compact('questions', 'questions_count', 'questions_time','questions_available','total_comment'));
     }
 
     /**

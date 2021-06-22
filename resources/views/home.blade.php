@@ -94,14 +94,16 @@
         <div class="row justify-content-center">
             <div class="col-md-10">     
                 <!-- Cards -->
-                <div class="card" id="test">
-                    <div class="card-header">{{ __('Welcome!') }}
-                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 mr-2" onclick="closing()"></button>
+                @if($first_time_login)
+                    <div class="card" id="test">
+                        <div class="card-header">{{ __('Welcome!') }}
+                            <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 mr-2" onclick="closing()"></button>
+                        </div>
+                        <div class="card-body">
+                            {{ __('You are logged in!') }}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {{ __('You are logged in!') }}
-                    </div>
-                </div>
+                @endif
                 <!-- Content -->
                 @if($questions_count >= 0 && $questions_count != NULL )
                     <h4 class="mt-4 d-block" id="results">{{$questions_count}} results</h4>
@@ -112,7 +114,7 @@
                     @if($questions_available > 0)
                         @foreach($questions as $key => $question)
                             <div class="col-md-4 mt-4">
-                                <div class="card" id="question-card" style="width: 18rem; height: 200px">
+                                <div class="card" id="question-card" style="width: 20rem; height: 250px; padding: 5px; ">
                                     <div class="card-body d-flex flex-column">
                                         @if ($question->status == "false")
                                             <span class="card-text text-danger">Thread already closed</span>
@@ -120,7 +122,11 @@
                                         <h5 class="card-title">{{$question->title}}</h5>
                                         <h6 class="card-subtitle mb-2 mt-2 text-muted">{{$questions_time[($key-1)+1]}}</h6>
                                         <p class="card-text">{{Str::limit($question->content, 73)}}</p>
-                                        <a href="/home/{{$question->id}}" class="mt-auto btn btn-primary" style="width:120px;">Read More</a>
+                                        <div class="mt-auto mb-3 comment d-inline-flex" style="color: #f5365c;">
+                                            <i class="fa fa-comments mr-2"></i>
+                                            <p class="card-text">{{$total_comment[$key]}}</p>
+                                        </div>
+                                        <a href="/home/{{$question->id}}" class="btn btn-primary" style="width:120px;">Read More</a>
                                     </div>                          
                                 </div>
                             </div>

@@ -6,7 +6,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <title>Forum Sunib</title>
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
@@ -117,12 +117,12 @@
                                 <p class="d-flex justify-content-center" id="greetings">Hi, {{ Auth::user()->username }}!</p>
                                 <a class="dropdown-item" href="/myprofile/{{Auth::user()->id}}">{{ __('My Profile') }}</a>
                                 <a class="dropdown-item" href="/settings/{{Auth::user()->id}}">{{ __('Settings') }}</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="/logout/{{Auth::user()->id}}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="/logout/{{Auth::user()->id}}" method="POST" class="d-none">
                                     @csrf
                                 </form>                               
                             </div>
