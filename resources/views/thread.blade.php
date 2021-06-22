@@ -57,6 +57,10 @@
         h5, h4 .comment, .comment{
             color:white;
         }
+        hr{
+            color:white;
+            border-top: 2px solid #fff;
+        }
         .editQuestionBtn{
             background-color: #2dce89;
             color: white;

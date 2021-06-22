@@ -30,7 +30,7 @@
             position: relative;
         }
         .setting{
-            width:50%;
+            width:40%;
         }
         #form_action{
             width: 90%;
@@ -79,6 +79,12 @@
         }
         #active:hover{
             box-shadow: 1px 1px 7px #888888;
+        }
+        #photo_profile{
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            object-fit: cover;
         }
     </style>
 
@@ -178,14 +184,19 @@
 
                     <!-- Avatar -->
                     <form method="POST" action="/settingsPhoto" enctype="multipart/form-data" id="form_upload" class="form-photo d-none">
+                        <h4 class="text-center mt-4 mb-4">Upload photo</h4>
                         @csrf
-                        <div class="form-group" style="height: 20rem;">
-                            <h4 class="text-center">Upload photo</h4>
-                            <input type="file" class="form-control-file text-center" id="photo" name="photo">
+                        @if($users->photo == NULL)
+                            <img class="rounded mx-auto mb-4 d-block img-thumbnail rounded-circle photo" id="photo_profile" src="{{asset('images/profile-placeholder.png')}}" alt="">
+                        @else
+                            <img class="rounded mx-auto mb-4 d-block img-thumbnail rounded-circle photo" id="photo_profile" src="{{'/images/'.$users->photo}}" alt="">
+                        @endif
+                        <div class="form-group" style="height: 3.5rem;">
+                            
+                            <input type="file" class="form-control-file text-center" id="photo" name="photo" onchange="readURL(this);">
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                         </div>
-
-                        <button type="submit" class="btn" id="active">UPLOAD</button>
+                        <button type="submit" class="btn mb-4" id="active">UPLOAD</button>
                     </form>
 
                     <!-- Password -->
@@ -266,5 +277,19 @@
             document.getElementById("form_action").className = "form-profile d-none";
             document.getElementById("form_upload").className = "form-photo d-none";
         }
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#photo_profile')
+                    .attr('src', e.target.result)
+                    .width(200)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     </script>
 @endsection

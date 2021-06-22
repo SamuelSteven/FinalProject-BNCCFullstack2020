@@ -87,6 +87,10 @@
         h5{
             color:white;
         }
+        hr{
+            color:white;
+            border-top: 2px solid #fff;
+        }
         .searchBtn{
             border: 1.5px solid #cfe2ff;
             color: #cfe2ff;
