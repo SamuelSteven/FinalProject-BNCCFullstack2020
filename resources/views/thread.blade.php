@@ -246,10 +246,10 @@
                     </form>
 
                     <!-- Reply -->
-                    <h5 class="card-text mt-4" id="reply-count">{{ $reply_count }} Replies</h5>
-                    @if($reply_count > 0)
+                    <h5 class="card-text mt-4" id="reply-count">{{ $reply_count[$key] }} Replies</h5>
+                    @if($reply_count[$key] > 0)
                         <!-- Reply Card -->
-                        @foreach ($reply as $keys => $r)
+                        @foreach ($reply[$key] as $keys => $r)
                             <div class="card my-4 replycard" style="width: 58rem;" id="reply_card">
                                 <div class="card-body">
                                     @if($r->user_reply['id'] == Auth::user()->id && $a->user['id'] != Auth::user()->id)
@@ -261,9 +261,8 @@
                                     @endif
                                     
                                     <p class="card-text my-4">{{ $r->content }}</p>
-
                                     @if($r->user_reply['id'] == Auth::user()->id && $questions->status == "true")
-                                        <a href="#replycard" class="btn editBtn mx-1 mt-3" onclick="displayReply(`{{$r->content}}`, {{$r->id}}, {{$keys}});">Edit</a>
+                                        <a href="#replycard" class="btn editBtn mx-1 mt-3" onclick="displayReply(`{{$r->content}}`, {{$r->id}}, {{$sum}});">Edit</a>
                                         <form action="/reply/{{$r->id}}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf
@@ -285,10 +284,11 @@
                                     @enderror
                                     <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="answerId" value="{{ $a->id }}">
-                                    <button type="submit" class="btn repltBtn my-3">Edit Your Reply!</button>
-                                    <a href="#edit" class="btn btn-danger closeBtn mx-2 text-decoration-none" onclick="hideReply1({{$key}});">Cancel</a>
+                                    <button type="submit" class="btn replyBtn my-3">Edit Your Reply!</button>
+                                    <a href="#edit" class="btn btn-danger closeBtn mx-2 text-decoration-none" onclick="hideReply1({{$sum}});">Cancel</a>
                                 </div>
                             </form>
+                            {{$sum++}}
                         @endforeach
                     @endif
                 @endforeach
