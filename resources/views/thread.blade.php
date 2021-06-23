@@ -6,7 +6,7 @@
             background: rgba(0,0,0,0.6);
             width: 100%;
             heigth: 100%;
-            position: absolute;
+            position: fixed;
             top: 0;
             bottom: 0;
             display: none;
@@ -15,7 +15,19 @@
             text-align: center;
             z-index: 999;
         }
-
+        .form-popup-edit{
+            background: rgba(0,0,0,0.6);
+            width: 100%;
+            heigth: 100%;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 999;
+        }
         .popup-content{
             height: 400px;
             width: 600px;
@@ -109,27 +121,6 @@
             background-color: #2dce89;
             color: white;
         }
-        .form-popup {
-            background: rgba(0,0,0,0.6);
-            width: 100%;
-            heigth: 100%;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            z-index: 999;
-        }
-        .popup-content{
-            height: 350px;
-            width: 600px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            position: relative;
-        }
     </style>
 
     <!-- PopUp Form -->
@@ -158,7 +149,7 @@
     </div>
 
     <!-- PopUp Edit Question -->
-    <div class="form-popup" id="popup">
+    <div class="form-popup-edit" id="popup">
         <div class="popup-content">
             <form method="POST" action="/home/{{$questions->id}}">
             @method('patch')
@@ -271,7 +262,7 @@
                         @method('patch')
                         @csrf
                         <div class="form d-none" id="edit" style="width:65rem;">
-                            <label for="content" style="margin-top:-9px;">Edit Your Answer Here</label>
+                            <label for="content" style="margin-top:-9px; color: white">Edit Your Answer Here</label>
                             <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Answer Here" id="content" style="height: 150px" name="content"></textarea>
                             @error('content')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -283,11 +274,11 @@
                         </div>
                     </form>
 
-                    <!-- Edit & Cancel Replies -->
+                    <!-- Create & Cancel Replies -->
                     <form method="POST" action="/reply" id="form_actions">
                         @csrf
                         <div class="form d-none" id="reply" style="width:65rem;">
-                            <label for="content" style="margin-top:-9px; color: white">Edit Your Reply Here</label>
+                            <label for="content" style="margin-top:-9px; color: white">Write Your Reply Here</label>
                             <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Reply Here" id="content" style="height: 150px" name="content"></textarea>
                             @error('content')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -332,14 +323,14 @@
                                 @method('patch')
                                 @csrf
                                 <div class="form d-none" id="edit" style="width:58rem;">
-                                    <label for="content" style="margin-top:-9px;">Edit Your Reply Here</label>
+                                    <label for="content" style="margin-top:-9px; color:white">Edit Your Reply Here</label>
                                     <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Edit Your Reply Here" id="content" style="height: 150px" name="content"></textarea>
                                     @error('content')
                                         <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                     <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="answerId" value="{{ $a->id }}">
-                                    <button type="submit" class="btn repltBtn my-3">Edit Your Reply!</button>
+                                    <button type="submit" class="btn replyBtn my-3">Edit Your Reply!</button>
                                     <a href="#edit" class="btn btn-danger closeBtn mx-2 text-decoration-none" onclick="hideReply1({{$key}});">Cancel</a>
                                 </div>
                             </form>
@@ -379,11 +370,11 @@
         });
 
         document.getElementById("edit").addEventListener("click", function(){
-            document.querySelector(".form-popup").style.display = "flex";
+            document.querySelector(".form-popup-edit").style.display = "flex";
         });
 
         document.getElementById("close").addEventListener("click", function(){
-            document.querySelector(".form-popup").style.display = "none";
+            document.querySelector(".form-popup-edit").style.display = "none";
         });
 
         function display(x,y,z){

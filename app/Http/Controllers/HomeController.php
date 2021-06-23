@@ -52,20 +52,25 @@ class HomeController extends Controller
         }
 
         // Count total comment
-        $answers = answer::all();
-        foreach($answers as $key => $a){
-            $total_reply[$key] = count($a->answer_Reply);
-        }
-        $keys = 0;
-        foreach($questions as $key => $question){
-            if(count($question->answers) > 0){
-                $total_comment[$key] = count($question->answers) + $total_reply[$keys];
-                $keys += 1;
-            } else{
-                $total_comment[$key] = 0;
+        if($questions_available > 0){
+            $answers = answer::all();
+            foreach($answers as $key => $a){
+                $total_reply[$key] = count($a->answer_Reply);
+            }
+            $keys = 0;
+        
+            foreach($questions as $key => $question){
+                if(count($question->answers) > 0){
+                    $total_comment[$key] = count($question->answers) + $total_reply[$keys];
+                    $keys += 1;
+                } else{
+                    $total_comment[$key] = 0;
+                }
             }
         }
-        
+        else{
+            $total_comment = NULL;
+        }
         return view('home',compact('questions', 'questions_count', 'questions_time', 'questions_available','total_comment','first_time_login'));
     }
 
@@ -91,30 +96,38 @@ class HomeController extends Controller
             ->get();
         $questions_count = $questions->count();
         $question = question::all();
-        foreach($question as $q){
-            $questions_time[] = $q->created_at->diffForHumans();
-        }
         $questions_available = $questions_count;
+        if($questions_available > 0){
+            foreach($question as $q){
+                $questions_time[] = $q->created_at->diffForHumans();
+            }
 
-        // Count total comment
-        foreach($questions as $key => $q){
-            $answers[] = answer::where('questionId', '=', $q->id)->get();
-        }
-        foreach($answers as $key => $a){
-            if($a->first()==NULL){
-                $total_reply[$key] = 0;
-            } else{
-                $total_reply[$key] = count($a->first()->answer_Reply);
+            // Count total comment
+        
+            foreach($questions as $key => $q){
+                $answers[] = answer::where('questionId', '=', $q->id)->get();
+            }
+            foreach($answers as $key => $a){
+                if($a->first()==NULL){
+                    $total_reply[$key] = 0;
+                } else{
+                    $total_reply[$key] = count($a->first()->answer_Reply);
+                }
+            }
+            $keys = 0;
+        
+            foreach($questions as $key => $q){
+                if(count($q->answers) > 0){
+                    $total_comment[$key] = count($q->answers) + $total_reply[$keys];
+                    $keys += 1;
+                } else{
+                    $total_comment[$key] = 0;
+                }
             }
         }
-        $keys = 0;
-        foreach($questions as $key => $q){
-            if(count($q->answers) > 0){
-                $total_comment[$key] = count($q->answers) + $total_reply[$keys];
-                $keys += 1;
-            } else{
-                $total_comment[$key] = 0;
-            }
+        else{
+            $total_comment = NULL;
+            $questions_time = NULL;
         }
         return view("home", compact('questions', 'questions_count','questions_time','questions_available','total_comment','first_time_login'));
     }
