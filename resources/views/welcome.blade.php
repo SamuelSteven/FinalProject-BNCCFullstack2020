@@ -35,10 +35,18 @@
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
                 margin: 0;
+                padding: 0;
             }
-
+            body{
+                position:relative;
+                min-height: 100vh;
+            }
+            body::after {
+                content: '';
+                display: block;
+                height: 120px; /* Set same as footer's height */
+            }
             .links > a {
                 color: #fff;
                 padding: 0 10px;
@@ -60,12 +68,13 @@
                 color:white;
             }
             footer{
-                padding: 1rem 0;
+                padding: 2rem 0;
                 background-color: #f4f5f7;
-                position: relative;
-                left: 0;
+                position: absolute;
+                height: 80px;
                 bottom: 0;
                 width: 100%;
+                clear: both;
             }
             footer ul li a{
                 text-decoration: none;

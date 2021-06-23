@@ -5,8 +5,7 @@
         .form-popup {
             background: rgba(0,0,0,0.6);
             width: 100%;
-            heigth: 100%;
-            position: absolute;
+            position: fixed;
             top: 0;
             bottom: 0;
             display: none;
@@ -74,7 +73,7 @@
     </div>
 
     <!-- PopUp Form -->
-    <div class="form-popup" id="popup">
+    <div class="form-popup">
         <div class="popup-content">
             <form method="POST" action="/home">
             @csrf
