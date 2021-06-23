@@ -161,7 +161,7 @@
                         <a class="nav-link active ml-4 mr-3" aria-current="page" href="{{url('/')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="register" class="btn ml-4" id="register">
+                        <a href="{{ route('register') }}" class="btn ml-4" id="register">
                             <span>
                                 <i class="fas fa-user-plus mr-1"></i>REGISTER
                             </span>    
@@ -211,10 +211,10 @@
                     </div>
 
                     <!-- Reply -->
-                    <h5 class="card-text mt-4" id="reply-count">{{ $reply_count }} Replies</h5>
-                    @if($reply_count > 0)
+                    <h5 class="card-text mt-4" id="reply-count">{{ $reply_count[$key] }} Replies</h5>
+                    @if($reply_count[$key] > 0)
                         <!-- Reply Card -->
-                        @foreach ($reply as $keys => $r)
+                        @foreach ($reply[$key] as $keys => $r)
                             <div class="card my-4 replycard" style="width: 58rem;" id="reply_card">
                                 <div class="card-body">
                                     <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a class="profileLink" href="/otherprofile_no_login/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a class="profileLink" href="/otherprofile_no_login/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>

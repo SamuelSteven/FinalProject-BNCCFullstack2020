@@ -39,10 +39,21 @@ class WelcomeController extends Controller
                 $questions_time = NULL;
             }
 
-            // Count total comment
+            // Count total comment (home)
             $answers = answer::all();
             foreach($answers as $key => $a){
-                $total_reply[$key] = count($a->answer_Reply);
+                if($key == 0){
+                    $test[$key] = $a->questionId;
+                    $total_reply[$key] = count($a->answer_Reply);
+                }else {
+                    if(in_array($a->questionId,$test)){
+                        $k = array_search($a->questionId, $test);
+                        $total_reply[$k] = $total_reply[$k] + count($a->answer_Reply); 
+                    }else{
+                        $test[$key] = $a->questionId;
+                        $total_reply[$key] = count($a->answer_Reply);
+                    }
+                }
             }
             $keys = 0;
             if($questions_available > 0){
@@ -72,11 +83,22 @@ class WelcomeController extends Controller
                 $questions_time = NULL;
             }
             
-            // Count total comment
+            // Count total comment (welcome)
             if($questions_available > 0){
                 $answers = answer::all();
                 foreach($answers as $key => $a){
-                    $total_reply[$key] = count($a->answer_Reply);
+                    if($key == 0){
+                        $test[$key] = $a->questionId;
+                        $total_reply[$key] = count($a->answer_Reply);
+                    }else {
+                        if(in_array($a->questionId,$test)){
+                            $k = array_search($a->questionId, $test);
+                            $total_reply[$k] = $total_reply[$k] + count($a->answer_Reply); 
+                        }else{
+                            $test[$key] = $a->questionId;
+                            $total_reply[$key] = count($a->answer_Reply);
+                        }
+                    }
                 }
                 $keys = 0;
             
@@ -137,15 +159,19 @@ class WelcomeController extends Controller
             }
     
             // Count total comment
-        
-            foreach($questions as $key => $q){
-                $answers[] = answer::where('questionId', '=', $q->id)->get();
-            }
+            $answers = answer::all();
             foreach($answers as $key => $a){
-                if($a->first()==NULL){
-                    $total_reply[$key] = 0;
-                } else{
-                    $total_reply[$key] = count($a->first()->answer_Reply);
+                if($key == 0){
+                    $test[$key] = $a->questionId;
+                    $total_reply[$key] = count($a->answer_Reply);
+                }else {
+                    if(in_array($a->questionId,$test)){
+                        $k = array_search($a->questionId, $test);
+                        $total_reply[$k] = $total_reply[$k] + count($a->answer_Reply); 
+                    }else{
+                        $test[$key] = $a->questionId;
+                        $total_reply[$key] = count($a->answer_Reply);
+                    }
                 }
             }
             $keys = 0;

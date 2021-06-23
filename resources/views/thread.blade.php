@@ -156,7 +156,7 @@
             @csrf
                 <div class="mb-3">
                     <h4 class="mb-3">Edit your Question</h4>
-                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close"></button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close-button"></button>
                     <label for="title" style="margin-left:-440px;">Question's Title</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter the Question Title" name="title" value="{{$questions->title}}">
                     @error('title')
@@ -335,7 +335,7 @@
                                     
                                 </div>
                             </form>
-                            {{$sum++}}
+                            <?php $sum++ ?>
                         @endforeach
                     @endif
                 @endforeach
@@ -375,7 +375,7 @@
             document.querySelector(".form-popup-edit").style.display = "flex";
         });
 
-        document.getElementById("close").addEventListener("click", function(){
+        document.getElementById("close-button").addEventListener("click", function(){
             document.querySelector(".form-popup-edit").style.display = "none";
         });
 

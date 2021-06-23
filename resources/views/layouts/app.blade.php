@@ -29,7 +29,7 @@
             html, body {
                 background-image: url('/background/Frame 1.png'); 
                 background-repeat: repeat-y;
-                background-size: cover;
+                background-size: 100%;
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
