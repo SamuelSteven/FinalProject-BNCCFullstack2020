@@ -37,8 +37,17 @@
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
                 margin: 0;
+                padding: 0;
+            }
+            body{
+                position:relative;
+                min-height: 100vh;
+            }
+            body::after {
+                content: '';
+                display: block;
+                height: 120px; /* Set same as footer's height */
             }
             h3{
                 text-align: center;
@@ -46,7 +55,6 @@
             .content {
                 text-align: center;
             }
-
             .links > a {
                 color: white;
                 padding: 0 25px;
@@ -115,6 +123,19 @@
             }
             .searchBtn:hover{
                 background-color: #cfe2ff;
+                color: black;
+            }
+            footer{
+                padding: 2rem 0;
+                background-color: #f4f5f7;
+                position: absolute;
+                height: 80px;
+                bottom: 0;
+                width: 100%;
+                clear: both;
+            }
+            footer ul li a{
+                text-decoration: none;
                 color: black;
             }
             @media (-webkit-device-pixel-ratio: 1.50) {
@@ -205,5 +226,23 @@
                 </div>
             </div>
         </div>
+
+        <footer class="mt-5">
+            <div class="container">
+                <div class="row align-items-center justify-content-md-between">
+                    <div class="col-md-6">
+                        <div class="ml-3">© 2021 Forum Sunib.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul class="nav nav-footer justify-content-end">
+                            <li class="nav-item"><a href="/home" class="mr-3">Home</a></li>
+                            <li class="nav-item"><a href="{{ route('login') }}" class="mr-3">Login</a></li>
+                            <li class="nav-item"><a href="{{ route('register') }}" class="mr-3">Register</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+        </footer>
     </body>
 </html>

@@ -29,7 +29,7 @@
     <script src="https://kit.fontawesome.com/87bc1c7077.js" crossorigin="anonymous"></script>
 
     <style>
-        html, body {
+       html, body {
             /* #1f3e75 */
             background-image: url('/background/Frame 1.png'); 
             background-repeat: repeat-y;
@@ -37,9 +37,17 @@
             color: #000;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
-            height: 100%;
             margin: 0;
             padding: 0;
+        }
+        body{
+            position:relative;
+            min-height: 100vh;
+        }
+        body::after {
+            content: '';
+            display: block;
+            height: 120px; /* Set same as footer's height */
         }
         .content {
             text-align: center;
@@ -80,12 +88,13 @@
             color: gray;
         }
         footer{
-            padding: 1rem 0;
+            padding: 2rem 0;
             background-color: #f4f5f7;
-            position: relative;
-            left: 0;
+            position: absolute;
+            height: 80px;
             bottom: 0;
             width: 100%;
+            clear: both;
         }
         footer ul li a{
             text-decoration: none;

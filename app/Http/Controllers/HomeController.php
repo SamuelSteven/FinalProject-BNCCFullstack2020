@@ -116,7 +116,6 @@ class HomeController extends Controller
                 $total_comment[$key] = 0;
             }
         }
-
-        return view("home", compact('questions', 'questions_count','questions_time','questions_available','total_comment', 'first_time_login'));
+        return view("home", compact('questions', 'questions_count','questions_time','questions_available','total_comment','first_time_login'));
     }
 }

@@ -67,7 +67,7 @@ class WelcomeController extends Controller
             else{
                 $questions_time = NULL;
             }
-
+            
             // Count total comment
             $answers = answer::all();
             foreach($answers as $key => $a){
