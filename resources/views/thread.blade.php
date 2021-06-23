@@ -101,7 +101,61 @@
             color: white;
             box-shadow: 1px 1px 7px #888888;
         }
+        .profileLink{
+            text-decoration: none;
+            color: #5e72e4;
+        }
+        .buttonAdd{
+            background-color: #2dce89;
+            color: white;
+        }
+        .form-popup {
+            background: rgba(0,0,0,0.6);
+            width: 100%;
+            heigth: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 999;
+        }
+        .popup-content{
+            height: 350px;
+            width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative;
+        }
     </style>
+
+    <!-- PopUp Form -->
+    <div class="form-popup" id="popup">
+        <div class="popup-content">
+            <form method="POST" action="/home">
+            @csrf
+                <div class="mb-3">
+                    <h4 class="mb-3">Have Any Questions?</h4>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close"></button>
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter the Question Title" name="title" value="{{old('title')}}">
+                    @error('title')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="form">
+                    <textarea class="form-control @error('content') is-invalid @enderror" placeholder="Enter the Question Content" id="content" style="height: 150px" name="content" value="{{old('content')}}"></textarea>
+                    @error('content')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                <button type="submit" class="btn buttonAdd my-3">Add Question!</button>
+            </form>
+        </div>
+    </div>
 
     <!-- PopUp Edit Question -->
     <div class="form-popup" id="popup">
@@ -142,9 +196,9 @@
                         <span class="card-text d-inline text-danger ml-2">Thread already closed</span>
                     @endif
                     @if($questions->users['id'] == Auth::user()->id)
-                        <h6 class="card-subtitle mb-2 mt-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a href="/myprofile/{{Auth::user()->id}}">{{$questions->users['username']}}</a></h6>
+                        <h6 class="card-subtitle mb-2 mt-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a class="profileLink" href="/myprofile/{{Auth::user()->id}}">{{$questions->users['username']}}</a></h6>
                     @else
-                        <h6 class="card-subtitle mb-2 mt-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a href="/otherprofile/{{$questions->users['id']}}">{{$questions->users['username']}}</a></h6>
+                        <h6 class="card-subtitle mb-2 mt-2 text-muted">Created at {{ $questions->created_at}} | Updated at {{ $questions->updated_at}} | By <a class="profileLink" href="/otherprofile/{{$questions->users['id']}}">{{$questions->users['username']}}</a></h6>
                     @endif
                     
                     <p class="card-text">{{$questions->content}}</p>
@@ -190,9 +244,9 @@
                     <div class="card my-4 answercard" style="width: 65rem;">
                         <div class="card-body">
                         @if($a->user['id'] == Auth::user()->id)
-                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a href="/myprofile/{{Auth::user()->id}}">{{$a->user['username']}}</a></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a class="profileLink" href="/myprofile/{{Auth::user()->id}}">{{$a->user['username']}}</a></h6>
                         @else
-                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Created at {{ $a->created_at}} | Updated at {{ $a->updated_at}} | By <a class="profileLink" href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
                         @endif
                             
                             <p class="card-text my-4">{{ $a->content }}</p>
@@ -253,11 +307,11 @@
                             <div class="card my-4 replycard" style="width: 58rem;" id="reply_card">
                                 <div class="card-body">
                                     @if($r->user_reply['id'] == Auth::user()->id && $a->user['id'] != Auth::user()->id)
-                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/myprofile/{{Auth::user()->id}}">{{$r->user_reply['username']}}</a> reply to <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a class="profileLink" href="/myprofile/{{Auth::user()->id}}">{{$r->user_reply['username']}}</a> reply to <a class="profileLink" href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
                                     @elseif($r->user_reply['id'] != Auth::user()->id && $a->user['id'] == Auth::user()->id)
-                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/otherprofile/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a href="/myprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a class="profileLink" href="/otherprofile/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a class="profileLink" href="/myprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
                                     @else
-                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a href="/otherprofile/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Created at {{ $r->created_at}} | Updated at {{ $r->updated_at}} | By <a class="profileLink" href="/otherprofile/{{$r->user_reply['id']}}">{{$r->user_reply['username']}}</a> reply to <a class="profileLink" href="/otherprofile/{{$a->user['id']}}">{{$a->user['username']}}</a></h6>
                                     @endif
                                     
                                     <p class="card-text my-4">{{ $r->content }}</p>
@@ -316,6 +370,13 @@
     </div>
     
     <script>
+        // PopUp Form
+        document.getElementById("askbutton").addEventListener("click", function(){
+            document.querySelector(".form-popup").style.display = "flex";
+        });
+        document.getElementById("close").addEventListener("click", function(){
+            document.querySelector(".form-popup").style.display = "none";
+        });
 
         document.getElementById("edit").addEventListener("click", function(){
             document.querySelector(".form-popup").style.display = "flex";

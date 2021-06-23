@@ -6,7 +6,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Forum Sunib</title>
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
@@ -27,7 +27,9 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #1f3e75; 
+                background-image: url('/background/Frame 1.png'); 
+                background-repeat: repeat-y;
+                background-size: cover;
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -53,7 +55,6 @@
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
-                text-transform: uppercase;
             }
             .navbar{
                 color: white;
@@ -88,6 +89,7 @@
                 background-color: white;
                 color: #5e72e4;
                 font-size: .875rem;
+                font-weight: bold;
             }
             #askbutton:hover{
                 color: black;
@@ -100,6 +102,11 @@
             #search_button:hover{
                 background-color: #cfe2ff;
                 color: black;
+            }
+            @media (-webkit-device-pixel-ratio: 1.50) {
+                * {
+                    zoom: 0.98;
+                }
             }
         </style>
     </head>
@@ -115,7 +122,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link active ml-4 mr-3" aria-current="page" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn ml-4" id="askbutton">
@@ -156,7 +163,7 @@
                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-                                <form id="logout-form" action="/logout/{{Auth::user()->id}}" method="POST" class="d-none">
+                                <form id="logout-form" action="/logout/{{Auth::user()->id}}"  method="POST" class="d-none">
                                     @csrf
                                 </form>                               
                             </div>
