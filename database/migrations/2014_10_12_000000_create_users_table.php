@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('created_at')->nullable();
+            $table->boolean('firt_time_login')->nullable()->default(1);
         });
     }
 

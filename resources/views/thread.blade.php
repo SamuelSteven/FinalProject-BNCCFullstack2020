@@ -113,7 +113,7 @@
             background: rgba(0,0,0,0.6);
             width: 100%;
             heigth: 100%;
-            position: absolute;
+            position: fixed;
             top: 0;
             bottom: 0;
             display: none;
