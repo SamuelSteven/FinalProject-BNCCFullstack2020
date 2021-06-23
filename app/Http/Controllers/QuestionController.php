@@ -68,13 +68,16 @@ class QuestionController extends Controller
         $answer = answer::where('questionId','=',$id)->get();
         $answer_count = $answer->count();
         if ($answer_count > 0){
-            $reply = reply::where('answerId','=',$answer[0]->id)->get();
-            $reply_count = $reply->count();
+            foreach($answer as $keys => $a){
+                $reply[] = reply::where('answerId','=',$a->id)->get();
+                $reply_count[] = $reply[$keys]->count();
+            }
         } else{
             $reply = NULL;
             $reply_count = 0;
         }
-        return view('/thread', compact('questions', 'answer', 'answer_count', 'reply', 'reply_count'));
+        $sum = 0;
+        return view('/thread', compact('questions', 'answer', 'answer_count', 'reply', 'reply_count','sum'));
     }
 
     /**
