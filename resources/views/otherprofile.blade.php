@@ -38,6 +38,9 @@
             text-align: center;
             object-fit: cover;
         }
+        .background{
+            background-image: linear-gradient(to bottom right, white, #D0D0D0);
+        }
     </style>
 
     <!-- PopUp Form -->
@@ -67,7 +70,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="card" style="width: 69rem">
+            <div class="card background" style="width: 69rem">
                 <div class="card-body">
                     <h3 class="card-title mt-2 mb-3">Profile</h3>
                     @if($users->photo == NULL)

@@ -78,6 +78,14 @@ class HomeController extends Controller
 
     public function show(Request $request)
     {
+        // First Time login
+        $first_time_login = false;
+        if (Auth::user()->first_time_login) {
+            $first_time_login = true;
+            Auth::user()->first_time_login = 0; 
+            Auth::user()->save();   
+        }
+
         $questions = question::where('title', 'like', '%' . $request->keyword .'%')
             ->orWhere('content', 'like', '%' . $request->keyword .'%')
             ->get();
@@ -109,6 +117,6 @@ class HomeController extends Controller
             }
         }
 
-        return view("home", compact('questions', 'questions_count','questions_time','questions_available','total_comment'));
+        return view("home", compact('questions', 'questions_count','questions_time','questions_available','total_comment', 'first_time_login'));
     }
 }
