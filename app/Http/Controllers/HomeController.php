@@ -129,12 +129,10 @@ class HomeController extends Controller
                     }
                 }
             }
-            $keys = 0;
-        
             foreach($questions as $key => $q){
-                if(count($q->answers) > 0){
-                    $total_comment[$key] = count($q->answers) + $total_reply[$keys];
-                    $keys += 1;
+                if(in_array($q->id,$test)){
+                    $k = array_search($q->id, $test);
+                    $total_comment[$key] = count($q->answers) + $total_reply[$k];
                 } else{
                     $total_comment[$key] = 0;
                 }
