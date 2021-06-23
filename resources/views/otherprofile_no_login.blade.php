@@ -31,7 +31,9 @@
         <style>
             html, body {
                 /* #1f3e75 */
-                background-color: #1f3e75; 
+                background-image: url('/background/Frame 1.png'); 
+                background-repeat: repeat-y;
+                background-size: cover;
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -47,17 +49,21 @@
                 display: block;
                 height: 120px; /* Set same as footer's height */
             }
+            h3{
+                text-align: center;
+            }
             .content {
                 text-align: center;
             }
-
             .links > a {
-                color: #000;
-                padding: 0 10px;
+                color: white;
+                padding: 0 25px;
+                font-size: 16px;
                 text-decoration: none;
             }
             .navbar{
-                width: 65%;
+                color: white;
+                width: 80%;
                 margin-left:auto;
                 margin-right: auto;
                 margin-top:20px;
@@ -105,9 +111,6 @@
             .navbar-light .navbar-brand:hover, .navbar-light .navbar-nav .nav-link.active:hover, .navbar-light .navbar-nav .show>.nav-link:hover, .links > a:hover{
                 color:#f0f0f0;
             }
-            h5{
-                color:white;
-            }
             .photo{
                 width: 200px;
                 height: 200px;
@@ -135,11 +138,29 @@
                 text-decoration: none;
                 color: black;
             }
+            @media (-webkit-device-pixel-ratio: 1.50) {
+                * {
+                    zoom: 0.98;
+                }
+            }
+            #register{
+                background-color: white;
+                color: #5e72e4;
+                font-size: .875rem;
+                font-weight: bold;
+            }
+            #register:hover{
+                color: black;
+                box-shadow: 1px 1px 7px #888888;
+            }
+            .background{
+                background-image: linear-gradient(to bottom right, white, #D0D0D0);
+            }
         </style>
     </head>
     <body>
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light navbar">
+        <nav class="navbar navbar-expand-lg navbar-light navbar mb-5">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{url('/')}}">Forum Sunib</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,34 +169,40 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
+                            <a class="nav-link active ml-4 mr-3" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="register" class="btn btn-primary ml-4 bg-info" id="register">Register</a>
+                            <a href="register" class="btn ml-4" id="register">
+                                <span>
+                                    <i class="fas fa-user-plus mr-1"></i>REGISTER
+                                </span>    
+                            </a>
                         </li>
                     </ul>
-                <form class="d-flex mr-5">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex mr-5" method="GET" action="{{url('/search')}}">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name='keyword'>
                     <button class="btn searchBtn me-5" type="submit"><i class="fas fa-search"></i></button>
                 </form>
-                @if (Route::has('login'))
-                    <div class="top-right links">
-                        @auth
-                            <a href="{{ url('/') }}">Home</a>
-                        @else
-                            <a href="{{ route('login') }}">Login</a>
-                        @endauth
-                    </.>
-                @endif
+                <div class="flex-center ml-auto">
+                        @if (Route::has('login'))
+                            <div class="top-right links">
+                                @auth
+                                    <a href="{{ url('/home') }}">Home</a>
+                                @else
+                                    <a href="{{ route('login') }}">Login</a>
+                                @endauth
+                            </.>
+                        @endif
+                    </div>
             </div>
         </nav>
 
         <!-- Content -->
         <div class="container">
             <div class="row justify-content-center">
-                <div class="card" style="width: 69rem">
+                <div class="card background" style="width: 69rem">
                     <div class="card-body">
-                        <h5 class="card-title mt-2 mb-3">Profile</h5>
+                        <h3 class="card-title mt-2 mb-3">Profile</h3>
                         @if($users->photo == NULL)
                             <img class="rounded mx-auto d-block img-thumbnail rounded-circle photo" src="{{asset('images/profile-placeholder.png')}}" alt=""/>
                         @else

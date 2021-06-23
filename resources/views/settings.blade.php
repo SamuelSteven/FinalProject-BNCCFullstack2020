@@ -30,12 +30,16 @@
             position: relative;
         }
         .setting{
-            width:40%;
+            width: 40%;
+        }
+        .card-setting{
+            width: 35rem;
         }
         #form_action{
             width: 90%;
             margin-left:auto;
             margin-right:auto;
+            color: gray;
         }
         #form_action input, label{
             display: flex;
@@ -44,11 +48,13 @@
             width: 90%;
             margin-left:auto;
             margin-right:auto;
+            color: gray;
         }
         #form_upload{
             width: 40%;
             margin-left:auto;
             margin-right:auto;
+            color: gray;
         }
         .button{
             width: 179px;
@@ -86,6 +92,24 @@
             text-align: center;
             object-fit: cover;
         }
+        @media (-webkit-device-pixel-ratio: 1.50) {
+            * {
+                zoom: 0.98;
+            }
+            .button{
+                width: 175px;
+            }
+            .width{
+                width: 455px;
+            }
+            .card-setting{
+                width: 33.6rem;
+            }
+        }
+        .buttonAdd{
+            background-color: #2dce89;
+            color: white;
+        }
     </style>
 
     <!-- PopUp Form -->
@@ -108,7 +132,7 @@
                     @enderror
                 </div>
                 <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-                <button type="submit" class="btn btn-primary my-3">Add Question!</button>
+                <button type="submit" class="btn buttonAdd my-3">Add Question!</button>
             </form>
         </div>
     </div>
@@ -127,7 +151,7 @@
                     <i class="fas fa-unlock-alt"></i> Password
                 </a>
             </div>
-            <div class="card" style="width: 35rem">
+            <div class="card card-setting">
                 <div class="card-body">
                     <!-- Profile -->
                     <form method="POST" action="/settingsProfile/{{$users->id}}" id="form_action" class="form_profile d-block text-center">

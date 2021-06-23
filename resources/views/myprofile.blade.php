@@ -57,6 +57,9 @@
             color: white;
             box-shadow: 1px 1px 7px #888888;
         }
+        .background{
+            background-image: linear-gradient(to bottom right, white, #D0D0D0);
+        }
     </style>
 
     <!-- PopUp Form -->
@@ -84,9 +87,9 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container profile">
         <div class="row justify-content-center">
-            <div class="card" style="width: 69rem">
+            <div class="card background" style="width: 69rem">
                 <div class="card-body">
                     <h3 class="card-title mt-2 mb-3">My Profile</h3>
                     @if($users->photo == NULL)

@@ -46,10 +46,22 @@
         .readBtn{
             background-color: #5e72e4;
             color: white;
+            width: 120px;
         }
         .readBtn:hover{
             color: white;
             box-shadow: 1px 1px 7px #888888;
+        }
+        #results{
+            color: white;
+        }
+        .content-card{
+            width: 20rem;
+            height: 250px;
+            padding: 5px;
+        }
+        #test{
+            width: 980px;
         }
     </style>
 
@@ -122,7 +134,7 @@
                     @if($questions_available > 0)
                         @foreach($questions as $key => $question)
                             <div class="col-md-4 mt-4">
-                                <div class="card" id="question-card" style="width: 20rem; height: 250px; padding: 5px; ">
+                                <div class="card content-card" id="question-card">
                                     <div class="card-body d-flex flex-column">
                                         @if ($question->status == "false")
                                             <span class="card-text text-danger">Thread already closed</span>
@@ -135,7 +147,7 @@
                                             <i class="fa fa-comments mr-2"></i>
                                             <p class="card-text">{{$total_comment[$key]}}</p>
                                         </div>
-                                        <a href="/home/{{$question->id}}" class="btn readBtn" style="width:120px;">Read More</a>
+                                        <a href="/home/{{$question->id}}" class="btn readBtn" >Read More</a>
                                     </div>                          
                                 </div>
                             </div>

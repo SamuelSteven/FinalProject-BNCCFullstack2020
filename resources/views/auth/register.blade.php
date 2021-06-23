@@ -31,7 +31,9 @@
     <style>
         html, body {
             /* #1f3e75 */
-            background-color: #1f3e75; 
+            background-image: url('/background/Frame 1.png'); 
+            background-repeat: repeat-y;
+            background-size: cover;
             color: #000;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
@@ -102,6 +104,7 @@
             background-color: white;
             color: #5e72e4;
             font-size: .875rem;
+            font-weight: bold;
         }
         #register:hover{
             color: black;
@@ -123,6 +126,14 @@
             background-color: #cfe2ff;
             color: black;
         }
+        @media (-webkit-device-pixel-ratio: 1.50) {
+            * {
+                zoom: 0.98;
+            }
+            .width{
+                width: 460px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -136,7 +147,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
+                        <a class="nav-link active ml-4 mr-3" aria-current="page" href="{{url('/')}}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a href="register" class="btn ml-4" id="register">
@@ -146,8 +157,8 @@
                         </a>
                     </li>
                 </ul>
-            <form class="d-flex mr-5">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex mr-5" method="GET" action="{{url('/search')}}">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name='keyword'>
                 <button class="btn searchBtn me-5" type="submit"><i class="fas fa-search"></i></button>
             </form>
             <div class="flex-center ml-auto">

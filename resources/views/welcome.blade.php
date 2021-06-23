@@ -31,7 +31,9 @@
         <style>
             html, body {
                 /* #1f3e75 */
-                background-color: #1f3e75; 
+                background-image: url('/background/Frame 1.png'); 
+                background-repeat: repeat-y;
+                background-size: cover;
                 color: #000;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -84,6 +86,7 @@
                 background-color: white;
                 color: #5e72e4;
                 font-size: .875rem;
+                font-weight: bold;
             }
             #register:hover{
                 color: black;
@@ -105,11 +108,16 @@
                 background-color: #cfe2ff;
                 color: black;
             }
+            @media (-webkit-device-pixel-ratio: 1.50) {
+                * {
+                    zoom: 0.98;
+                }
+            }
           </style>
     </head>
     <body>
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light navbar">
+        <nav class="navbar navbar-expand-lg navbar-light navbar mb-4">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{url('/')}}">Forum Sunib</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,29 +126,31 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
+                            <a class="nav-link active ml-4 mr-3" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('register') }}" class="btn ml-4" id="register">
+                            <a href="register" class="btn ml-4" id="register">
                                 <span>
                                     <i class="fas fa-user-plus mr-1"></i>REGISTER
-                                </span> 
+                                </span>    
                             </a>
                         </li>
                     </ul>
                 <form class="d-flex mr-5" method="GET" action="{{url('/search')}}">
-                    <input class="form-control" type="search" placeholder="Search" name="keyword" aria-label="Search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
                     <button class="btn searchBtn me-5" type="submit"><i class="fas fa-search"></i></button>
                 </form>
-                @if (Route::has('login'))
-                    <div class="top-right links">
-                        @auth
-                            <a href="{{ url('/') }}">Home</a>
-                        @else
-                            <a href="{{ route('login') }}">Login</a>
-                        @endauth
-                    </.>
-                @endif
+                <div class="flex-center ml-auto">
+                        @if (Route::has('login'))
+                            <div class="top-right links">
+                                @auth
+                                    <a href="{{ url('/home') }}">Home</a>
+                                @else
+                                    <a href="{{ route('login') }}">Login</a>
+                                @endauth
+                            </.>
+                        @endif
+                    </div>
             </div>
         </nav>
         
