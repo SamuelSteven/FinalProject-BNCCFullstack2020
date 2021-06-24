@@ -134,13 +134,17 @@
                 width: 460px;
             }
         }
+        .logo{
+            width: 110px; 
+            margin-right: 20px;
+        }
     </style>
 </head>
 <body>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light navbar mb-5">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{url('/')}}">Forum Sunib</a>
+            <a href="{{url('/')}}"><img src="{{asset('background/logo.png')}}" class="logo" alt="logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
