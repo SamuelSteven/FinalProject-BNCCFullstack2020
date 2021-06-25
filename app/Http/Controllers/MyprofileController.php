@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Carbon\Carbon;
 
 class MyprofileController extends Controller
 {
@@ -47,7 +48,9 @@ class MyprofileController extends Controller
     public function show($id)
     {
         $users = User::find($id);
-        return view('/myprofile', compact('users'));
+        $thread_count = count($users->users);
+        $comment_count = count($users->user_Reply) + count($users->user);
+        return view('/myprofile', compact('users', 'thread_count','comment_count'));
     }
 
     /**

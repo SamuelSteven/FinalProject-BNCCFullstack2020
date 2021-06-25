@@ -19,6 +19,8 @@ class User extends Authenticatable
         'username', 'name', 'photo', 'email', 'password',
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -29,7 +31,7 @@ class User extends Authenticatable
     ];
 
     public function users() {
-        return $this->hasMany('App\question', 'id', 'userId');
+        return $this->hasMany('App\question', 'userId', 'id');
     }
     public function user() {
         return $this->hasMany('App\answer', 'userId', 'id');

@@ -6,7 +6,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <title>Forum Sunib</title>
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
@@ -73,13 +73,14 @@
                 color:#f0f0f0;
             }
             footer{
-                padding: 2rem 0;
+                padding: 2rem 0px;
                 background-color: #f4f5f7;
                 position: absolute;
                 height: 80px;
                 bottom: 0;
                 width: 100%;
                 clear: both;
+                padding-left: 90px;
             }
             footer ul li a{
                 text-decoration: none;
@@ -188,10 +189,9 @@
                     </div>
     
                     <div class="col-md-6">
-                        <ul class="nav nav-footer justify-content-end">
-                            <li class="nav-item"><a href="/home" class="mr-3">Home</a></li>
-                            <li class="nav-item"><a href="{{ route('login') }}" class="mr-3">Login</a></li>
-                            <li class="nav-item"><a href="{{ route('register') }}" class="mr-3">Register</a></li>
+                        <ul class="nav nav-footer" style="margin-left: 340px;">
+                            <li class="nav-item navFooter"><a href="/home" class="mr-3">Home</a></li>
+                            <li class="nav-item navFooter"><a href="/home" class="mr-3">Ask Question</a></li>
                         </ul>
                     </div>
                 </div>

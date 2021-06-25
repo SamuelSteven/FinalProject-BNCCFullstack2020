@@ -47,7 +47,9 @@ class OtherProfileController extends Controller
     public function show($id)
     {
         $users = User::find($id);
-        return view('/otherprofile', compact('users'));
+        $thread_count = count($users->users);
+        $comment_count = count($users->user_Reply) + count($users->user);
+        return view('/otherprofile', compact('users','thread_count','comment_count'));
     }
 
     /**
@@ -59,7 +61,9 @@ class OtherProfileController extends Controller
     public function display($id)
     {
         $users = User::find($id);
-        return view('/otherprofile_no_login', compact('users'));
+        $thread_count = count($users->users);
+        $comment_count = count($users->user_Reply) + count($users->user);
+        return view('/otherprofile_no_login', compact('users','thread_count','comment_count'));
     }
 
     /**

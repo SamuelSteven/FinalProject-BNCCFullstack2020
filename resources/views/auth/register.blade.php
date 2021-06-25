@@ -95,6 +95,7 @@
             bottom: 0;
             width: 100%;
             clear: both;
+            padding-left: 90px;
         }
         footer ul li a{
             text-decoration: none;
@@ -293,7 +294,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <ul class="nav nav-footer justify-content-end">
+                    <ul class="nav nav-footer" style="margin-left: 340px;">
                         <li class="nav-item"><a href="/home" class="mr-3">Home</a></li>
                         <li class="nav-item"><a href="{{ route('login') }}" class="mr-3">Login</a></li>
                         <li class="nav-item"><a href="{{ route('register') }}" class="mr-3">Register</a></li>

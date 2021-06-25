@@ -39,7 +39,7 @@ class HomeController extends Controller
         }
 
         // Show Questions
-        $questions = question::all();
+        $questions = question::paginate(9);
         $questions_count = NULL;
         $questions_available = $questions->count();
         if($questions_available > 0){
@@ -103,7 +103,7 @@ class HomeController extends Controller
 
         $questions = question::where('title', 'like', '%' . $request->keyword .'%')
             ->orWhere('content', 'like', '%' . $request->keyword .'%')
-            ->get();
+            ->paginate(9);
         $questions_count = $questions->count();
         $question = question::all();
         $questions_available = $questions_count;

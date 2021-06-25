@@ -28,6 +28,8 @@
         }
         .icon{
             text-align: center;
+            position: relative;
+            top:-60px;
         }
         .text{
             font-size: 16px;
@@ -37,9 +39,19 @@
             height: 200px;
             text-align: center;
             object-fit: cover;
+            position: relative;
+            top:-80px;
         }
         .background{
             background-image: linear-gradient(to bottom right, white, #D0D0D0);
+        }
+        .threads{
+            margin-top: 30px;
+            margin-left: 100px;
+        }
+        .comments{
+            margin-top: 30px;
+            margin-left: 220px;
         }
     </style>
 
@@ -68,30 +80,39 @@
         </div>
     </div>
 
+    <h3 class="card-title mt-4 mb-5" style="color:white">Profile</h3>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="card background" style="width: 69rem">
+            <div class="card background mt-5" style="width: 69rem; ">
                 <div class="card-body">
-                    <h3 class="card-title mt-2 mb-3">Profile</h3>
                     @if($users->photo == NULL)
                         <img class="rounded mx-auto d-block img-thumbnail rounded-circle photo" src="{{asset('images/profile-placeholder.png')}}" alt=""/>
                     @else
                         <img class="rounded mx-auto d-block img-thumbnail rounded-circle photo" src="{{'/images/'.$users->photo}}" alt=""/>
                     @endif
                     <div class="icon">
-                        <i class="fas fa-at mt-2"></i>
-                        <p class="text">{{$users->username}}</p>
+                        <h3>{{$users->username}}</h3>
                     </div>
                     
                     <div class="icon">
-                        <i class="fas fa-user mt-2"></i>
-                        <p class="text">{{$users->name}}</p>
+                        <p class="text"><i class="fas fa-user mt-3"></i> {{$users->name}}</p>
                     </div>
                     
                     <div class="icon">
-                        <i class="fas fa-envelope mt-2"></i>
-                        <p class="text">{{$users->email}}</p>
+                        <p class="text"><i class="fas fa-envelope mt-2"></i> {{$users->email}}</p>
                     </div>
+
+                    <div class="icon">
+                        <p class="text"><i class="fas fa-calendar mt-2"></i> Joined {{$users->created_at->format('d M, Y')}}</p>
+                    </div>
+
+                    <div class="position-absolute top-0 start-0 threads text-center">
+                        <p class="text"> <h5><b>{{$thread_count}}</b></h5> Threads</p>
+                    </div>
+
+                    <div class="position-absolute top-0 start-0 comments text-center">
+                        <p class="text"> <h5><b>{{$comment_count}}</b></h5> Comments</p>
+                    </div> 
                     
                 </div>
             </div>

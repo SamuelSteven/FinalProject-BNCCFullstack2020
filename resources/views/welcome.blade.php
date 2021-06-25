@@ -77,6 +77,7 @@
                 bottom: 0;
                 width: 100%;
                 clear: both;
+                padding-left: 90px;
             }
             footer ul li a{
                 text-decoration: none;
@@ -116,6 +117,17 @@
             .logo{
                 width: 110px; 
                 margin-right: 20px;
+            }
+            .pagination{
+                margin-left: 38%;
+                width: 50%;
+            }
+            .pagination a{
+                color: #000;
+            }
+            .page-item.active .page-link{
+                background-color: #5e72e4;
+                border-color: #5e72e4;
             }
           </style>
     </head>
@@ -190,6 +202,9 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                <div class="pagination mt-5">
+                                    {{ $questions->links() }}
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -205,7 +220,7 @@
                     </div>
     
                     <div class="col-md-6">
-                        <ul class="nav nav-footer justify-content-end">
+                        <ul class="nav nav-footer" style="margin-left: 340px;">
                             <li class="nav-item"><a href="/home" class="mr-3">Home</a></li>
                             <li class="nav-item"><a href="{{ route('login') }}" class="mr-3">Login</a></li>
                             <li class="nav-item"><a href="{{ route('register') }}" class="mr-3">Register</a></li>

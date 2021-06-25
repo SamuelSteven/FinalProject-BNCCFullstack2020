@@ -63,6 +63,17 @@
         #test{
             width: 980px;
         }
+        .pagination{
+            margin-left: 38%;
+            width: 50%;
+        }
+        .pagination a{
+            color: #000;
+        }
+        .page-item.active .page-link{
+            background-color: #5e72e4;
+            border-color: #5e72e4;
+        }
     </style>
 
     <!-- PopUp Status -->
@@ -152,6 +163,9 @@
                                 </div>
                             </div>
                         @endforeach
+                        <div class="pagination mt-5">
+                            {{ $questions->links() }}
+                        </div>
                     @endif
                 </div>
             </div>
