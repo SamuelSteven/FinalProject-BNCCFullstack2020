@@ -195,7 +195,11 @@
                                                 <p class="card-text">{{Str::limit($question->content, 73)}}</p>
                                                 <div class="mt-auto mb-3 comment d-inline-flex" style="color: #f5365c;">
                                                     <i class="fa fa-comments mr-2"></i>
-                                                    <p class="card-text">{{$total_comment[$key]}}</p>
+                                                    @if($total_comment != NULL)
+                                                        <p class="card-text">{{$total_comment[$key]}}</p>
+                                                    @else
+                                                        <p class="card-text">0</p>
+                                                    @endif
                                                 </div>
                                                 <a href="/thread_no_login/{{$question->id}}" class="btn readBtn" style="width:120px;">Read More</a>
                                             </div>                          

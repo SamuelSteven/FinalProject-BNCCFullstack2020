@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->string('content');
             $table->timestamps();
-            $table->string('status');
+            $table->string('status')->default(true);
             $table->unsignedBigInteger('userId');
 
             $table->foreign('userId')->references('id')->on('users');

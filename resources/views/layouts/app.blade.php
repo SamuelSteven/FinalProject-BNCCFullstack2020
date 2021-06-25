@@ -45,6 +45,27 @@
                 display: block;
                 height: 120px; /* Set same as footer's height */
             }
+            .form-popup {
+                background: rgba(0,0,0,0.6);
+                width: 100%;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                z-index: 999;
+            }
+
+            .popup-content{
+                height: 350px;
+                width: 600px;
+                background: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                position: relative;
+            }
             .content {
                 text-align: center;
             }
@@ -117,6 +138,31 @@
     </head>
 
     <body>
+        <!-- PopUp Form -->
+        <div class="form-popup">
+            <div class="popup-content">
+                <form method="POST" action="/home">
+                @csrf
+                    <div class="mb-3">
+                        <h4 class="mb-3">What is Your Question?</h4>
+                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close"></button>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Your Question's Title" name="title" value="{{old('title')}}">
+                        @error('title')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="form">
+                        <textarea class="form-control @error('content') is-invalid @enderror" placeholder="What is Your Question?" id="content" style="height: 150px" name="content" value="{{old('content')}}"></textarea>
+                        @error('content')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                    <button type="submit" class="buttonAdd btn my-3">ADD QUESTION!</button>
+                </form>
+            </div>
+        </div>
+
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-light navbar">
             <div class="container-fluid">
@@ -191,7 +237,7 @@
                     <div class="col-md-6">
                         <ul class="nav nav-footer" style="margin-left: 340px;">
                             <li class="nav-item navFooter"><a href="/home" class="mr-3">Home</a></li>
-                            <li class="nav-item navFooter"><a href="/home" class="mr-3">Ask Question</a></li>
+                            <li class="nav-item navFooter"><a href="#" id="askButton" class="mr-3">Ask Question</a></li>
                         </ul>
                     </div>
                 </div>
@@ -199,4 +245,14 @@
         </footer>
     </body>
 </html>
+
+<script>
+    // PopUp Form
+    document.getElementById("askButton").addEventListener("click", function(){
+        document.querySelector(".form-popup").style.display = "flex";
+    });
+    document.getElementById("close").addEventListener("click", function(){
+        document.querySelector(".form-popup").style.display = "none";
+    });
+</script>
 

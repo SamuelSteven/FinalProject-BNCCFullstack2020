@@ -17,12 +17,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username');
             $table->string('name');
-            $table->mediumText('profilePicture')->nullable();
+            $table->mediumText('photo')->nullable();
             $table->string('email');
             $table->string('password');
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('created_at')->nullable();
-            $table->boolean('firt_time_login')->nullable()->default(1);
+            $table->boolean('first_time_login')->nullable()->default(1);
         });
     }
 

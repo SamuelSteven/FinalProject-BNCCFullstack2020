@@ -2,28 +2,6 @@
 
 @section('content')
     <style>
-        .form-popup {
-            background: rgba(0,0,0,0.6);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            z-index: 999;
-        }
-
-        .popup-content{
-            height: 350px;
-            width: 600px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            position: relative;
-        }
-
         .popup{
             width: 20%;
             position: fixed;
@@ -61,7 +39,7 @@
             padding: 5px;
         }
         #test{
-            width: 980px;
+            width: 1055px;
         }
         .pagination{
             margin-left: 38%;
@@ -73,6 +51,11 @@
         .page-item.active .page-link{
             background-color: #5e72e4;
             border-color: #5e72e4;
+        }
+        @media (-webkit-device-pixel-ratio: 1.50) {
+            #test {
+                width: 980px;
+            }
         }
     </style>
 
@@ -93,31 +76,6 @@
                 <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="btn-close"></button>
             </div>
         @endif
-    </div>
-
-    <!-- PopUp Form -->
-    <div class="form-popup">
-        <div class="popup-content">
-            <form method="POST" action="/home">
-            @csrf
-                <div class="mb-3">
-                    <h4 class="mb-3">What is Your Question?</h4>
-                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="close"></button>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Your Question's Title" name="title" value="{{old('title')}}">
-                    @error('title')
-                        <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="form">
-                    <textarea class="form-control @error('content') is-invalid @enderror" placeholder="What is Your Question?" id="content" style="height: 150px" name="content" value="{{old('content')}}"></textarea>
-                    @error('content')
-                        <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
-                <button type="submit" class="buttonAdd btn my-3">ADD QUESTION!</button>
-            </form>
-        </div>
     </div>
 
     <!-- Container -->
@@ -156,7 +114,11 @@
 
                                         <div class="mt-auto mb-3 comment d-inline-flex" style="color: #f5365c;">
                                             <i class="fa fa-comments mr-2"></i>
-                                            <p class="card-text">{{$total_comment[$key]}}</p>
+                                            @if($total_comment != NULL)
+                                                <p class="card-text">{{$total_comment[$key]}}</p>
+                                            @else
+                                                <p class="card-text">0</p>
+                                            @endif
                                         </div>
                                         <a href="/home/{{$question->id}}" class="btn readBtn" >Read More</a>
                                     </div>                          

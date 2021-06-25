@@ -115,27 +115,32 @@ class HomeController extends Controller
             // Count total comment
         
             $answers = answer::all();
-            foreach($answers as $key => $a){
-                if($key == 0){
-                    $test[$key] = $a->questionId;
-                    $total_reply[$key] = count($a->answer_Reply);
-                }else {
-                    if(in_array($a->questionId,$test)){
-                        $k = array_search($a->questionId, $test);
-                        $total_reply[$k] = $total_reply[$k] + count($a->answer_Reply); 
-                    }else{
+            if(count($answers) > 0){
+                foreach($answers as $key => $a){
+                    if($key == 0){
                         $test[$key] = $a->questionId;
                         $total_reply[$key] = count($a->answer_Reply);
+                    }else {
+                        if(in_array($a->questionId,$test)){
+                            $k = array_search($a->questionId, $test);
+                            $total_reply[$k] = $total_reply[$k] + count($a->answer_Reply); 
+                        }else{
+                            $test[$key] = $a->questionId;
+                            $total_reply[$key] = count($a->answer_Reply);
+                        }
                     }
                 }
-            }
-            foreach($questions as $key => $q){
-                if(in_array($q->id,$test)){
-                    $k = array_search($q->id, $test);
-                    $total_comment[$key] = count($q->answers) + $total_reply[$k];
-                } else{
-                    $total_comment[$key] = 0;
+                foreach($questions as $key => $q){
+                    if(in_array($q->id,$test)){
+                        $k = array_search($q->id, $test);
+                        $total_comment[$key] = count($q->answers) + $total_reply[$k];
+                    } else{
+                        $total_comment[$key] = 0;
+                    }
                 }
+            } else{
+                $test = NULL;
+                $total_comment = NULL;
             }
         }
         else{
