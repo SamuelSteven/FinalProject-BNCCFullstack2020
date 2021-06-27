@@ -29,6 +29,14 @@
             border-radius: 5px;
             position: relative;
         }
+        .popup{
+            width: 20%;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            margin-bottom: -20px;
+            z-index: 9990;
+        }
         .setting{
             width: 40%;
         }
@@ -111,6 +119,25 @@
             color: white;
         }
     </style>
+
+    <!-- PopUp Status -->
+    <div class="popup">
+        @if (session('status'))
+            <div class="alert alert-success" id="notif">
+                {{ session('status') }}
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="btn-close"></button>
+            </div>
+        @endif
+    </div>
+
+    <div class="popup">
+        @if (session('danger'))
+            <div class="alert alert-danger" id="notif">
+                {{ session('danger') }}
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="btn-close"></button>
+            </div>
+        @endif
+    </div>
 
     <!-- PopUp Form -->
     <div class="form-popup" id="popup">
@@ -285,6 +312,21 @@
         document.getElementById("close").addEventListener("click", function(){
             document.querySelector(".form-popup").style.display = "none";
         });
+
+        // Notification Close Button 
+        document.getElementById("btn-close").addEventListener("click", function(){
+            document.querySelector("#notif").style.display = "none";
+        });
+        
+        // Notification Auto Close
+        setTimeout(function(){ 
+            document.querySelector("#notif").style.display = "none";
+        }, 5000);
+
+        // Close Button Function
+        function closing(){
+            document.getElementById("test").style.display = "none";
+        }
 
         function show_profile(){
             document.getElementById("form_actions").className = "form-password d-none";
