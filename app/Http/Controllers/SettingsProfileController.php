@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class SettingsProfileController extends Controller
 {
@@ -46,8 +47,12 @@ class SettingsProfileController extends Controller
      */
     public function show($id)
     {
-        $users = User::find($id);
-        return view('/settings', compact('users'));
+        if(Auth::user()->id == $id){
+            $users = User::find($id);
+            return view('/settings', compact('users'));    
+        }else{
+            return 'This is not your account!';
+        }
     }
 
     /**
@@ -82,7 +87,7 @@ class SettingsProfileController extends Controller
                 'username' => $request->username,
                 'email' => $request->email
             ]);
-        return redirect('/home')->with('status','Profile Edited Successfully!'); 
+        return redirect('/settings/'.$id)->with('status','Profile Edited Successfully!'); 
     }
 
     /**

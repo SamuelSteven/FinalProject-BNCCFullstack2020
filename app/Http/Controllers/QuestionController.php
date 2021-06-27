@@ -23,9 +23,9 @@ class QuestionController extends Controller
             ]);
             
         if($request->status == "true"){
-            return redirect('/home')->with('status','Thread Opened Successfully!');     
+            return redirect('/home/'.$id)->with('status','Thread Opened Successfully!');     
         }else{
-            return redirect('/home')->with('danger','Thread Closed Successfully!'); 
+            return redirect('/home/'.$id)->with('danger','Thread Closed Successfully!'); 
         }
     }
 
@@ -113,7 +113,7 @@ class QuestionController extends Controller
                 'status' => $request->status
             ]);
         
-        return redirect('/home')->with('status','Question Edited Successfully!'); ;
+        return redirect('/home/'.$question->id)->with('status','Question Edited Successfully!'); ;
     }
 
     /**
@@ -127,6 +127,6 @@ class QuestionController extends Controller
         $questions = question::find($id);
         $questions->delete();
 
-        return redirect('/home')->with('status','Question Deleted Successfully!');
+        return redirect('/home/'.$question->id)->with('status','Question Deleted Successfully!');
     }
 }

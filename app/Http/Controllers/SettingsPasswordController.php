@@ -81,7 +81,7 @@ class SettingsPasswordController extends Controller
             ->update([
                 'password' => Hash::make($request->confirmPassword)
             ]);
-        return redirect('/home')->with('status','Password Changed Successfully!');    
+        return redirect('/settings/'. $id)->with('status','Password Changed Successfully!');    
     }
 
     /**

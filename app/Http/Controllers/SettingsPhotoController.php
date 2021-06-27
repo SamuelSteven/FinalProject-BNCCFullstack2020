@@ -80,7 +80,7 @@ class SettingsPhotoController extends Controller
         $user->save();
 
         $request->photo->move(public_path('images'), $img);
-        return redirect('/home')->with('status','Photo Uploaded Successfully!'); ;
+        return redirect('/settings/'.$request->userId)->with('status','Photo Uploaded Successfully!'); ;
     }
 
     /**

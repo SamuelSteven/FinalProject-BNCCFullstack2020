@@ -41,7 +41,7 @@ class AnswerController extends Controller
 
         answer::create($request->all());
         
-        return redirect('/home')->with('status','Answer Added Successfully!'); 
+        return redirect('/home/'.$request->questionId)->with('status','Answer Added Successfully!'); 
     }
 
     /**
@@ -83,7 +83,8 @@ class AnswerController extends Controller
             ->update([
                 'content' => $request->content,
             ]);
-        return redirect('/home')->with('status','Answer Edited Successfully!'); 
+
+        return redirect('/home/'.$request->questionId)->with('status','Answer Edited Successfully!'); 
     }
 
     /**
@@ -92,9 +93,9 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         answer::destroy($id);
-        return redirect('/home')->with('status','Answer Deleted Successfully!'); 
+        return redirect('/home/'.$request->questionId)->with('status','Answer Deleted Successfully!'); 
     }
 }

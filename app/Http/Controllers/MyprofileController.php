@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class MyprofileController extends Controller
 {
@@ -47,10 +48,14 @@ class MyprofileController extends Controller
      */
     public function show($id)
     {
-        $users = User::find($id);
-        $thread_count = count($users->users);
-        $comment_count = count($users->user_Reply) + count($users->user);
-        return view('/myprofile', compact('users', 'thread_count','comment_count'));
+        if(Auth::user()->id == $id){
+            $users = User::find($id);
+            $thread_count = count($users->users);
+            $comment_count = count($users->user_Reply) + count($users->user);
+            return view('/myprofile', compact('users', 'thread_count','comment_count'));
+        } else{
+            return 'This is not your account!';
+        }
     }
 
     /**

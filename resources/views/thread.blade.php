@@ -36,13 +36,13 @@
             border-radius: 5px;
             position: relative;
         }
-
         .popup{
             width: 20%;
             position: fixed;
             bottom: 0;
             right: 0;
             margin-bottom: -20px;
+            z-index: 9990;
         }
         .row>*{
             padding-right: 0;
@@ -122,6 +122,25 @@
             color: white;
         }
     </style>
+
+    <!-- PopUp Status -->
+    <div class="popup">
+        @if (session('status'))
+            <div class="alert alert-success" id="notif">
+                {{ session('status') }}
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="btn-close"></button>
+            </div>
+        @endif
+    </div>
+
+    <div class="popup">
+        @if (session('danger'))
+            <div class="alert alert-danger" id="notif">
+                {{ session('danger') }}
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 mr-3" id="btn-close"></button>
+            </div>
+        @endif
+    </div>
 
     <!-- PopUp Form -->
     <div class="form-popup" id="popup">
@@ -251,6 +270,7 @@
                                 <form action="/answer/{{$a->id}}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
+                                    <input type="hidden" name="questionId" value="{{ $questions->id }}">
                                     <button type="submit" class="btn btn-danger deleteBtn mt-3">Delete</button>
                                 </form>
                             @endif
@@ -285,6 +305,7 @@
                             @enderror
                             <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="answerId" value="{{ $a->id }}">
+                            <input type="hidden" name="questionId" value="{{ $questions->id }}">
                             <button type="submit" class="btn replyBtn my-3">Add Reply!</button>
                             <a href="#reply" class="btn btn-danger closeBtn mx-2 text-decoration-none" onclick="hideReply({{$key}});">Cancel</a>
                         </div>
@@ -311,6 +332,7 @@
                                         <form action="/reply/{{$r->id}}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf
+                                            <input type="hidden" name="questionId" value="{{ $questions->id }}">
                                             <button type="submit" class="btn btn-danger deleteBtn mt-3">Delete</button>
                                         </form>
                                     @endif
@@ -329,6 +351,7 @@
                                     @enderror
                                     <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="answerId" value="{{ $a->id }}">
+                                    <input type="hidden" name="questionId" value="{{ $questions->id }}">
                                     <button type="submit" class="btn replyBtn my-3">Edit Your Reply!</button>
 
                                     <a href="#edit" class="btn btn-danger closeBtn mx-2 text-decoration-none" onclick="hideReply1({{$sum}});">Cancel</a>
@@ -378,6 +401,21 @@
         document.getElementById("close-button").addEventListener("click", function(){
             document.querySelector(".form-popup-edit").style.display = "none";
         });
+
+        // Notification Close Button 
+        document.getElementById("btn-close").addEventListener("click", function(){
+            document.querySelector("#notif").style.display = "none";
+        });
+        
+        // Notification Auto Close
+        setTimeout(function(){ 
+            document.querySelector("#notif").style.display = "none";
+        }, 5000);
+
+        // Close Button Function
+        function closing(){
+            document.getElementById("test").style.display = "none";
+        }
 
         function display(x,y,z){
             var form_edit = $("#form_action #edit");

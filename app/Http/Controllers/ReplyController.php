@@ -41,7 +41,7 @@ class ReplyController extends Controller
 
         reply::create($request->all());
         
-        return redirect('/home')->with('status','Reply Added Successfully!'); 
+        return redirect('/home/'.$request->questionId)->with('status','Reply Added Successfully!'); 
     }
 
     /**
@@ -83,7 +83,7 @@ class ReplyController extends Controller
             ->update([
                 'content' => $request->content,
             ]);
-        return redirect('/home')->with('status','Reply Edited Successfully!'); 
+        return redirect('/home/'.$request->questionId)->with('status','Reply Edited Successfully!'); 
     }
 
     /**
@@ -92,9 +92,9 @@ class ReplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         reply::destroy($id);
-        return redirect('/home')->with('danger','Reply Deleted Successfully!'); 
+        return redirect('/home/'.$request->questionId)->with('danger','Reply Deleted Successfully!'); 
     }
 }
