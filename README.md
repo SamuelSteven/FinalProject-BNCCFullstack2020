@@ -30,10 +30,26 @@ Before we do the coding, we make an **Entity Relationship Diagram** and **Use Ca
 ## Project Result
 The program is in accordance with the requirements given and the program runs well without any bugs or errors. When the program is run, the program will display results as shown in the following image:
 
+You can register and login your account because all your data is stored in the phpmyadmin database.
 ![Forum-Sunib-Register](https://user-images.githubusercontent.com/65062685/147770530-b73e3ea1-b3ac-4ae6-8e42-17dcec099069.png)
 ![Forum-Sunib-Login](https://user-images.githubusercontent.com/65062685/147770597-0dbeed1d-ed83-4349-9193-efa2f2f460a4.png)
+
+And also you can change or update your account which is password, photo profile, and your profile!
 ![Forum-Sunib-Settings-Password](https://user-images.githubusercontent.com/65062685/147770691-0da42685-732b-4694-be05-f53738c02a63.png)
 ![Forum-Sunib-Settings-Photo](https://user-images.githubusercontent.com/65062685/147770702-6f8aa268-d46f-45cc-ab6f-162c44cab6f8.png)
 ![Forum-Sunib-Settings-Profile](https://user-images.githubusercontent.com/65062685/147770708-7032e312-39f9-4ff3-b656-9c305e51c48e.png)
+
+The initial display on our website will look like the image below. The program will display all threads with thread status (whether the thread is closed or still open), thread title, thread content, and thread creation time.
+
+Search for questions or information that suits you! We provide a search feature to make it easier for you to filter information.
+![Forum-Sunib-Home](https://user-images.githubusercontent.com/65062685/147804413-925381e0-6e4a-462e-a0f0-984114ebc241.png)
+![Forum-Sunib-SearchFeature](https://user-images.githubusercontent.com/65062685/147804403-2602166c-c15b-4009-a389-e5ba7ccb90a1.png)
+
+When you answer someone's thread, the program will automatically display your answer in that thread so other accounts can see your answer!
+
+You can also reply to answers and replies from other people even yourself.
 ![Forum-Sunib-Thread](https://user-images.githubusercontent.com/65062685/147770662-c2d6ef92-9429-4b7d-b4ee-cadb1abe2d91.png)
+
+You can ask your question and automatically program will make you a new thread!
 ![Forum-Sunib-Question](https://user-images.githubusercontent.com/65062685/147770460-ff5bb78a-8e03-44be-a018-fe12cb32fa00.png)
+
